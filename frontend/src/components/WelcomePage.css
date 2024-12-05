@@ -1,0 +1,49 @@
+.welcome-page {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #4CAF50; /* Цвет фона заголовка */
+    color: white;
+}
+
+.logo img {
+    height: 50px; /* Высота логотипа */
+}
+
+.company-name {
+    font-size: 24px;
+    margin: 0;
+}
+
+.nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 20px; /* Отступы между элементами меню */
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.auth-buttons .button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    background-color: #ff9800; /* Цвет кнопки */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+main {
+    margin-top: 40px;
+}

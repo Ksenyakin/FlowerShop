@@ -1,0 +1,22 @@
+.profile-page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.profile-info {
+    margin-top: 20px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.profile-info p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
