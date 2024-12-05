@@ -12,6 +12,8 @@ RUN npm install
 # Копируем весь проект в контейнер
 COPY . .
 
+RUN chmod +x node_modules/.bin/react-scripts
+
 # Собираем проект
 RUN npm run build
 
