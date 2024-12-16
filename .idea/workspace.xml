@@ -164,7 +164,9 @@
       <path value="$PROJECT_DIR$/frontend" />
     </ignored-roots>
     <MESSAGE value="1" />
-    <option name="LAST_COMMIT_MESSAGE" value="1" />
+    <MESSAGE value="test" />
+    <MESSAGE value="fixup! 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixup! 1" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
