@@ -1,36 +1,36 @@
-FROM node:14-alpine AS builder
+FROM node:14-alpine AS build
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
 
-# Копируем файлы package.json и package-lock.json
+# Копируем package.json и package-lock.json
 COPY package*.json ./
 
 # Устанавливаем зависимости
 RUN npm install
 
+# Убедимся, что react-scripts доступны
+RUN ls -la ./node_modules/.bin
+
+# Исправляем права доступа для react-scripts
+RUN chmod +x ./node_modules/.bin/react-scripts
+
 # Копируем весь проект в контейнер
 COPY . .
-
-RUN chmod +x node_modules/.bin/react-scripts
 
 # Собираем проект
 RUN npm run build
 
-# Используем минимальный образ nginx для сервировки
 FROM nginx:stable-alpine
 
-# Устанавливаем рабочую директорию
-WORKDIR /usr/share/nginx/html
+# Копируем собранный фронтенд в директорию Nginx
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Копируем собранный фронтенд из предыдущего этапа
-COPY --from=builder /app/build .
-
-# Копируем кастомный конфиг nginx, если нужно
+# Копируем кастомный конфиг Nginx
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Открываем порт
 EXPOSE 80
 
-# Запускаем nginx
+# Запускаем Nginx
 CMD ["nginx", "-g", "daemon off;"]
