@@ -1,16 +1,19 @@
 package utils
 
 import (
-	"fmt"
-	_ "github.com/lib/pq"
+	"database/sql"
+	"log"
 )
 
-// Проверяет, является ли пользователь администратором
+// IsAdmin проверяет, является ли пользователь администратором
 func IsAdmin(userID int) (bool, error) {
-	var count int
-	err := DB.QueryRow("SELECT COUNT(*) FROM admins WHERE user_id = $1", userID).Scan(&count)
-	if err != nil {
-		return false, fmt.Errorf("ошибка при проверке прав администратора: %w", err)
+	var exists bool
+	query := "SELECT EXISTS (SELECT 1 FROM admins WHERE user_id = $1)"
+	err := DB.QueryRow(query, userID).Scan(&exists)
+	if err != nil && err != sql.ErrNoRows {
+		log.Printf("Ошибка при проверке прав администратора: %v", err)
+		return false, err
 	}
-	return count > 0, nil
+
+	return exists, nil
 }

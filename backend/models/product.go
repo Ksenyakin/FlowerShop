@@ -20,10 +20,10 @@ type Product struct {
 }
 
 func CreateProduct(product *Product) error {
-	query := "INSERT INTO products (name, description, price, stock) VALUES ($1, $2, $3, $4) RETURNING id"
+	query := "INSERT INTO products (name, description, price, stock, image_url) VALUES ($1, $2, $3, $4, $5) RETURNING id"
 
 	// Выполняем запрос и получаем ID созданного товара
-	err := utils.DB.QueryRow(query, product.Name, product.Description, product.Price, product.Stock).Scan(&product.ID)
+	err := utils.DB.QueryRow(query, product.Name, product.Description, product.Price, product.Stock, product.ImageURL).Scan(&product.ID)
 	if err != nil {
 		log.Println("Ошибка при добавлении товара в базу данных:", err)
 		return err

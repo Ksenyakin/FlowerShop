@@ -2,8 +2,9 @@ package routes
 
 import (
 	"flower-shop-backend/handlers"
-	middlewares "flower-shop-backend/middleware"
+	middleware "flower-shop-backend/middleware"
 	"github.com/gorilla/mux"
+	"net/http"
 )
 
 func SetupRoutes() *mux.Router {
@@ -46,9 +47,12 @@ func SetupRoutes() *mux.Router {
 	r.HandleFunc("/api/pay", handlers.ProcessPayment).Methods("POST")
 	r.HandleFunc("/api/purchase/{id}", handlers.ProcessPurchaseHandler).Methods("POST")
 
-	adminRoutes := r.PathPrefix("/api/admin").Subrouter()
-	adminRoutes.Use(middlewares.AdminMiddleware)
-	adminRoutes.HandleFunc("/products", handlers.AdminManageProducts).Methods("GET", "POST", "PUT", "DELETE")
+	adminRouter := r.PathPrefix("/api/admin").Subrouter()
+	adminRouter.Use(middleware.AdminMiddleware)
+	adminRouter.HandleFunc("/products", handlers.AdminManageProducts).Methods("GET", "POST", "PUT", "DELETE")
+	adminRouter.HandleFunc("/upload", handlers.UploadImage).Methods("POST")
+
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("uploads"))))
 
 	return r
 }

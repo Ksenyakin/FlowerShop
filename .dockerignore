@@ -1,0 +1,6 @@
+node_modules
+db_data
+build
+nginx.conf
+.dockerignore
+docker-compose.yml

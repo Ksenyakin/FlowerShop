@@ -77,3 +77,13 @@ CREATE TABLE payments (
                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                           updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE admins (
+                        id SERIAL PRIMARY KEY,
+                        user_id INT NOT NULL UNIQUE,
+                        created_at TIMESTAMP DEFAULT NOW()
+);
+
+ALTER TABLE admins
+    ADD CONSTRAINT fk_admin_user
+        FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE;

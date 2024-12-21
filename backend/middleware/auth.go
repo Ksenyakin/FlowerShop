@@ -1,48 +1,76 @@
 package middlewares
 
 import (
+	"context"
 	"flower-shop-backend/utils"
-	"github.com/dgrijalva/jwt-go"
 	"net/http"
-	"os"
 	"strings"
+
+	"github.com/dgrijalva/jwt-go"
+	"github.com/sirupsen/logrus"
 )
 
-type Config struct {
-	Secret string
-}
+var jwtSecret = []byte("your-secret-key")
 
-// AuthMiddleware проверяет наличие и валидность JWT токена
 func AuthMiddleware(next http.Handler) http.Handler {
-
-	config := Config{
-		Secret: getEnv("JWT_SECRET", "0000"),
-	}
-
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		tokenString := r.Header.Get("Authorization")
-		if tokenString == "" {
-			http.Error(w, "Missing token", http.StatusUnauthorized)
+		tokenStr := r.Header.Get("Authorization")
+		if tokenStr == "" || !strings.HasPrefix(tokenStr, "Bearer ") {
+			http.Error(w, `{"message": "Authorization header is required"}`, http.StatusUnauthorized)
 			return
 		}
 
-		tokenString = strings.TrimPrefix(tokenString, "Bearer ")
-		claims := &utils.Claims{}
+		// Убираем "Bearer " из токена
+		tokenStr = strings.TrimPrefix(tokenStr, "Bearer ")
 
-		token, err := jwt.ParseWithClaims(tokenString, claims, func(token *jwt.Token) (interface{}, error) {
-			return []byte(config.Secret), nil
+		// Проверяем токен
+		token, err := jwt.Parse(tokenStr, func(token *jwt.Token) (interface{}, error) {
+			if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+				return nil, jwt.NewValidationError("unexpected signing method", jwt.ValidationErrorSignatureInvalid)
+			}
+			return jwtSecret, nil
 		})
+
 		if err != nil || !token.Valid {
-			http.Error(w, "Invalid token", http.StatusUnauthorized)
+			logrus.Warn("Неправильный токен: ", err)
+			http.Error(w, `{"message": "Invalid token"}`, http.StatusUnauthorized)
+			return
+		}
+
+		// Извлечение claims
+		claims, ok := token.Claims.(jwt.MapClaims)
+		if !ok {
+			http.Error(w, `{"message": "Invalid token claims"}`, http.StatusUnauthorized)
+			return
+		}
+
+		email, ok := claims["email"].(string)
+		if !ok {
+			http.Error(w, `{"message": "Email not found in token"}`, http.StatusUnauthorized)
+			return
+		}
+
+		// Добавляем email в контекст
+		ctx := context.WithValue(r.Context(), "email", email)
+		next.ServeHTTP(w, r.WithContext(ctx))
+	})
+}
+
+// AdminMiddleware проверяет, что пользователь является администратором
+func AdminMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		userID, ok := r.Context().Value("user_id").(int)
+		if !ok {
+			http.Error(w, "Не удалось получить информацию о пользователе", http.StatusUnauthorized)
+			return
+		}
+
+		isAdmin, err := utils.IsAdmin(userID)
+		if err != nil || !isAdmin {
+			http.Error(w, "Недостаточно прав для доступа", http.StatusForbidden)
 			return
 		}
 
 		next.ServeHTTP(w, r)
 	})
-}
-func getEnv(key, defaultVal string) string {
-	if value, exists := os.LookupEnv(key); exists {
-		return value
-	}
-	return defaultVal
 }
