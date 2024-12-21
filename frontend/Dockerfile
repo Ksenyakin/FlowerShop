@@ -1,4 +1,5 @@
-FROM node:14-alpine AS build
+# Этап сборки
+FROM node:18-buster AS build
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
@@ -12,8 +13,11 @@ RUN npm install
 # Убедимся, что react-scripts доступны
 RUN ls -la ./node_modules/.bin
 
-# Исправляем права доступа для react-scripts
-RUN chmod +x ./node_modules/.bin/react-scripts
+# Исправляем права доступа для всех бинарных файлов
+RUN chmod -R +x ./node_modules/.bin
+
+# Проверяем права доступа для react-scripts
+RUN ls -la ./node_modules/.bin/react-scripts
 
 # Копируем весь проект в контейнер
 COPY . .
@@ -21,6 +25,7 @@ COPY . .
 # Собираем проект
 RUN npm run build
 
+# Этап запуска
 FROM nginx:stable-alpine
 
 # Копируем собранный фронтенд в директорию Nginx
