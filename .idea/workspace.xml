@@ -5,35 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="test">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/base/16384/16414_fsm" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/base/16384/16504" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/base/16384/16505" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/base/16384/16510" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/base/16384/16512" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_data/postmaster.pid" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/AdminPanel.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/AdminPanel.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/ProductPage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/ProductPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/ProductsPage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/ProductsPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/handlers/admin_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/handlers/admin_handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middleware/admin.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middleware/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middleware/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/product.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/admin.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/admin.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-init/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db-init/init.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/5/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/5/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/global/pg_internal.init" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/pg_stat/pgstat.stat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/WelcomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/WelcomePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
