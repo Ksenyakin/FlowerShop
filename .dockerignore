@@ -1,6 +1,6 @@
-node_modules
-db_data
-build
+node_modules/
+db_data/
+build/
 nginx.conf
 Dockerfile
 docker-compose.yml
