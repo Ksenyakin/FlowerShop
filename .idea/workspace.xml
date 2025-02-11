@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="test">
-      <change afterPath="$PROJECT_DIR$/backend/handlers/upload_handler.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/utils/s3.go" afterDir="false" />
+    <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="add AdminDashboard">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/PG_VERSION" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/base/1/112" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/base/1/113" afterDir="false" />
@@ -1309,50 +1308,21 @@
       <change afterPath="$PROJECT_DIR$/db_data/pg_logical/replorigin_checkpoint" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/pg_multixact/members/0000" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/pg_multixact/offsets/0000" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db_data/pg_stat/pgstat.stat" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/pg_subtrans/0000" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/pg_wal/000000010000000000000001" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/pg_xact/0000" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/postgresql.auto.conf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/postgresql.conf" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/db_data/postmaster.opts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/db_data/postmaster.pid" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/frontend/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/AdminDashboard.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/AdminDashboard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/AdminHeader.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/AdminHeader.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/CategoriesAdmin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/CategoriesAdmin.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/ProductForm.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/ProductForm.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/ProductsAdmin.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/admin/ProductsAdmin.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/node_modules/@yandex/smart-captcha/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/node_modules/@yandex/smart-captcha/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/.env" beforeDir="false" afterPath="$PROJECT_DIR$/backend/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/handlers/admin_handlers.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/handlers/categories_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/handlers/categories_handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/handlers/product_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/handlers/product_handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/handlers/user_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/handlers/user_handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middleware/auth.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middleware/auth.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/middleware/cors.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/middleware/cors.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/admin.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/categories.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/categories.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/routes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/admin.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/config.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/token.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/token.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-init/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db-init/init.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AdminPanel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AdminPanel.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RegisterForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/UserDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/UserDropdown.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/WelcomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/WelcomePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1400,28 +1370,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
-    &quot;Go Build.go build flower-shop-backend.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.automatic.dependencies.download&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/DanKs/GolandProjects/flower-shop-backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\DanKs\\GolandProjects\\flower-shop-backend\\frontend\\node_modules\\typescript\\lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultGoTemplateProperty": "Go File",
+    "Go Build.go build flower-shop-backend.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "RunOnceActivity.go.modules.automatic.dependencies.download": "true",
+    "RunOnceActivity.go.modules.go.list.on.any.changes.was.set": "true",
+    "git-widget-placeholder": "Rebasing master",
+    "go.import.settings.migrated": "true",
+    "go.sdk.automatically.set": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/DanKs/GolandProjects/flower-shop-backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "ts.external.directory.path": "C:\\Users\\DanKs\\GolandProjects\\flower-shop-backend\\frontend\\node_modules\\typescript\\lib"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend" />
@@ -1515,7 +1485,8 @@
     <MESSAGE value="1" />
     <MESSAGE value="fixup! 1" />
     <MESSAGE value="test" />
-    <option name="LAST_COMMIT_MESSAGE" value="test" />
+    <MESSAGE value="add AdminDashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="add AdminDashboard" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

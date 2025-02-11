@@ -30,6 +30,12 @@ services:
       DB_USER: postgres
       DB_PASSWORD: 12345678
       DB_NAME: FlowersShopBD
+      AWS_ACCESS_KEY_ID: YIBDV9U1GSYFR44OU0ME
+      AWS_SECRET_ACCESS_KEY: N0kL1V9urlhk0ZdLRAscaZOAV80iVBk79BLCQ5SL
+      AWS_REGION: ru-1
+      AWS_ENDPOINT: https://s3.timeweb.cloud
+      AWS_BUCKET_NAME: 84163e07-decor-fleurs-s3
+
     depends_on:
       db:
         condition: service_healthy
