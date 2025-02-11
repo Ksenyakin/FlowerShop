@@ -4,87 +4,69 @@ import (
 	"encoding/json"
 	"flower-shop-backend/models"
 	"github.com/gorilla/mux"
-	"log"
 	"net/http"
 	"strconv"
 )
 
-// Структура для запроса создания категории
-type CreateCategoryRequest struct {
-	ID          string `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-}
+// Добавление категории или подкатегории
+func AddCategory(w http.ResponseWriter, r *http.Request) {
+	var data struct {
+		Name     string `json:"name"`
+		ParentID *int   `json:"parent_id"`
+	}
 
-// Хендлер для создания новой категории
-func CreateCategoryHandler(w http.ResponseWriter, r *http.Request) {
-	var req CreateCategoryRequest
-
-	// Декодирование JSON-запроса
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, "Invalid input", http.StatusBadRequest)
+	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
+		http.Error(w, `{"message": "Invalid input"}`, http.StatusBadRequest)
 		return
 	}
 
-	// Вызов функции для создания категории
-	categoryID, err := models.CreateCategory(req.Name, req.Description)
+	id, err := models.AddCategory(data.Name, data.ParentID)
 	if err != nil {
-		http.Error(w, "Failed to create category", http.StatusInternalServerError)
-		log.Println("Ошибка при создании категории:", err)
+		http.Error(w, `{"message": "Failed to add category"}`, http.StatusInternalServerError)
 		return
 	}
 
-	// Ответ с id новой категории
-	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]interface{}{
-		"message": "Категория успешно создана",
-		"id":      categoryID,
-	})
+	json.NewEncoder(w).Encode(map[string]int{"id": id})
 }
-func DeleteCategoryHandler(w http.ResponseWriter, r *http.Request) {
-	// Получаем ID категории из параметров маршрута
+
+// Получение всех категорий
+func GetCategories(w http.ResponseWriter, r *http.Request) {
+	categories, err := models.GetCategories()
+	if err != nil {
+		http.Error(w, `{"message": "Failed to get categories"}`, http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(categories)
+}
+
+// Обновление категории
+func UpdateCategory(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	categoryID, err := strconv.Atoi(vars["id"])
 	if err != nil {
-		http.Error(w, "Invalid category ID", http.StatusBadRequest)
+		http.Error(w, `{"message": "Invalid category ID"}`, http.StatusBadRequest)
 		return
 	}
 
-	// Удаляем категорию
-	if err := models.DeleteCategory(categoryID); err != nil {
-		http.Error(w, "Failed to delete category", http.StatusInternalServerError)
+	var data struct {
+		Name     string `json:"name"`
+		ParentID *int   `json:"parent_id"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&data); err != nil {
+		http.Error(w, `{"message": "Invalid input"}`, http.StatusBadRequest)
 		return
 	}
 
-	// Возвращаем успешный ответ
-	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Категория успешно удалена"))
-}
-func UpdateCategoryHandler(w http.ResponseWriter, r *http.Request) {
-	// Получаем ID категории из параметров маршрута
-	vars := mux.Vars(r)
-	categoryID, err := strconv.Atoi(vars["id"])
+	err = models.UpdateCategory(categoryID, data.Name, data.ParentID)
 	if err != nil {
-		http.Error(w, "Invalid category ID", http.StatusBadRequest)
+		http.Error(w, `{"message": "Failed to update category"}`, http.StatusInternalServerError)
 		return
 	}
 
-	var req models.Category
-
-	// Декодируем тело запроса
-	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		http.Error(w, "Invalid input", http.StatusBadRequest)
-		return
-	}
-
-	// Обновляем категорию
-	if err := models.UpdateCategory(categoryID, req.Name, req.Description); err != nil {
-		http.Error(w, "Failed to update category", http.StatusInternalServerError)
-		return
-	}
-
-	// Возвращаем успешный ответ
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Категория успешно обновлена"))
+	json.NewEncoder(w).Encode(map[string]string{"message": "Category updated successfully"})
 }

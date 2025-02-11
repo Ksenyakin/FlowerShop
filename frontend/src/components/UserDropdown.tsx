@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './UserDropdown.css';
 
-
 const UserDropdown: React.FC = () => {
-    const [userInfo, setUserInfo] = useState<{ name: string } | null>(null);
+    const [userInfo, setUserInfo] = useState<{ name: string; role?: string } | null>(null);
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
@@ -48,6 +47,7 @@ const UserDropdown: React.FC = () => {
                     <a href="/profile">Профиль</a>
                     <a href="/orders">Заказы</a>
                     <a href="/favorites">Избранное</a>
+                    {userInfo?.role === "admin" && <a href="/admin">Админ-панель</a>}
                     <button onClick={handleLogout}>Выйти</button>
                 </div>
             )}

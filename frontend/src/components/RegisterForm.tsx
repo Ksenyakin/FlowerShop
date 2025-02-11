@@ -9,7 +9,6 @@ const RegisterForm: React.FC = () => {
     const [address, setAddress] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [captchaToken, setCaptchaToken] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const [successMessage, setSuccessMessage] = useState('');
@@ -21,19 +20,13 @@ const RegisterForm: React.FC = () => {
         setError('');
         setSuccessMessage('');
 
-        if (!captchaToken) {
-            setError('Пожалуйста, подтвердите капчу.');
-            setLoading(false);
-            return;
-        }
-
         try {
             const response = await fetch('/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, password, address, phone, email, captchaToken }), // Добавляем captchaToken в тело запроса
+                body: JSON.stringify({ name, password, address, phone, email }),
             });
 
             if (!response.ok) {
@@ -114,14 +107,6 @@ const RegisterForm: React.FC = () => {
                         required
                     />
                 </div>
-
-                <div className="form-group">
-                    <SmartCaptcha
-                        sitekey="ysc1_FnSemp2tf4wSb2BqTDqunLLWKl12cUJJB8cfSEOuf60e361d"
-                        onSuccess={setCaptchaToken}
-                    />
-                </div>
-
                 <button type="submit" className="button">Зарегистрироваться</button>
                 {error && <p className="error-message">{error}</p>}
                 {successMessage && <p className="success-message">{successMessage}</p>}

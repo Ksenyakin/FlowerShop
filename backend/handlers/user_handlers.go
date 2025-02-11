@@ -6,13 +6,11 @@ import (
 	middlewares "flower-shop-backend/middleware"
 	"flower-shop-backend/models"
 	"flower-shop-backend/utils"
-	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/crypto/bcrypt"
 	"net/http"
 	"os"
-	"reflect"
 	"time"
 )
 
@@ -187,6 +185,7 @@ func GetUserInfo(w http.ResponseWriter, r *http.Request) {
 	// Формируем ответ
 	response := map[string]interface{}{
 		"name":          user.Name,
+		"role":          user.Role,
 		"phone":         user.Phone,
 		"address":       user.Address,
 		"email":         user.Email,
@@ -230,10 +229,7 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, `{"message": "Failed to check user existence"}`, http.StatusInternalServerError)
 		return
 	}
-	fmt.Println(reflect.TypeOf(user.Password))
-	fmt.Println([]byte(user.Password))
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
-	fmt.Println(hashedPassword)
 	if err != nil {
 		logrus.Error("Ошибка хэширования пароля: ", err)
 		http.Error(w, `{"message": "Failed to hash password"}`, http.StatusInternalServerError)
@@ -241,8 +237,12 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Вставка нового пользователя в базу данных
-	_, err = utils.DB.Exec(`INSERT INTO users (email, password_hash, name, phone, address, birthday) VALUES ($1, $2, $3, $4, $5, CASE WHEN $6 = '' THEN NULL ELSE $6::DATE END)`,
-		user.Email, hashedPassword, user.Name, user.Phone, user.Address, user.DayOfBirthday)
+	_, err = utils.DB.Exec(`
+    INSERT INTO users (email, role, password_hash, name, phone, address, birthday) 
+    VALUES ($1, COALESCE($2, 'user'), $3, $4, $5, $6, 
+            CASE WHEN $7::TEXT = '' THEN NULL ELSE $7::DATE END);
+`, user.Email, user.Role, hashedPassword, user.Name, user.Phone, user.Address, user.DayOfBirthday)
+
 	if err != nil {
 		logrus.Error("Ошибка регистрации пользователя: ", err)
 		http.Error(w, `{"message": "Failed to register user"}`, http.StatusInternalServerError)
@@ -261,19 +261,12 @@ func RegisterUser(w http.ResponseWriter, r *http.Request) {
 func LoginUser(w http.ResponseWriter, r *http.Request) {
 	logrus.Info("Авторизация пользователя")
 
-	type Config struct {
-		Secret string
-	}
-	config := Config{
-		Secret: getEnv("JWT_SECRET", "0000"),
-	}
-
 	var loginData struct {
 		Email    string `json:"email"`
 		Password string `json:"password"`
 	}
 
-	// Декодирование входных данных
+	// Декодирование JSON запроса
 	if err := json.NewDecoder(r.Body).Decode(&loginData); err != nil {
 		logrus.Warn("Ошибка декодирования данных запроса: ", err)
 		http.Error(w, `{"message": "Invalid input"}`, http.StatusBadRequest)
@@ -288,32 +281,39 @@ func LoginUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Создание JWT токена
+	// 🔥 Проверяем, что роль пользователя не пустая 🔥
+	if user.Role == "" {
+		logrus.Warn("Ошибка: роль пользователя отсутствует в БД, устанавливаем 'user' по умолчанию")
+		user.Role = "user" // Если роль отсутствует, ставим "user" по умолчанию
+	}
+
+	// Читаем секретный ключ из переменной окружения
+	secret := getEnv("JWT_SECRET", "0000")
+
+	// Создание JWT с ролью пользователя
 	claims := &utils.Claims{
-		Email: user.Email,
+		UserID: user.ID,
+		Email:  user.Email,
+		Role:   user.Role, // 🔥 Теперь роль включается в токен
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 1).Unix(), // Токен истекает через 1 час
-			Issuer:    "your-app-name",
+			Issuer:    "flower-shop",
 		},
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-	tokenString, err := token.SignedString([]byte(config.Secret))
+	tokenString, err := token.SignedString([]byte(secret))
 	if err != nil {
 		logrus.Error("Ошибка генерации токена: ", err)
 		http.Error(w, `{"message": "Failed to generate token"}`, http.StatusInternalServerError)
 		return
 	}
 
-	logrus.Info("Токен успешно сгенерирован для пользователя: ", user.Email)
+	logrus.Infof("Токен успешно сгенерирован для пользователя %s (роль: %s)", user.Email, user.Role)
 
-	// Возвращение токена клиенту
-	response := map[string]string{"token": tokenString}
+	// Отправляем токен клиенту
 	w.Header().Set("Content-Type", "application/json")
-	if err := json.NewEncoder(w).Encode(response); err != nil {
-		logrus.Error("Ошибка отправки ответа: ", err)
-		http.Error(w, `{"message": "Failed to send response"}`, http.StatusInternalServerError)
-	}
+	json.NewEncoder(w).Encode(map[string]string{"token": tokenString})
 }
 
 func getEnv(key, defaultVal string) string {

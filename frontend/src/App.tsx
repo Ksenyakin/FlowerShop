@@ -7,15 +7,23 @@ import ProfilePage from "./components/ProfilePage";
 import UpdateUserPage from "./components/UpdateUserPage";
 import ProductsPage from "./components/ProductsPage";
 import ProductPage from "./components/ProductPage";
-import AdminPanel from "./components/AdminPanel";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import ProductsAdmin from "./pages/admin/ProductsAdmin";
+import ProductForm from "./pages/admin/ProductForm";
+import CategoriesAdmin from "./pages/admin/CategoriesAdmin";
+
 
 
 const App: React.FC = () => {
     return (
         <Router>
             <Routes>
-
-                <Route path="/admin" element={<AdminPanel/>} />
+                {/* Админские маршруты */}
+                <Route path="/admin" element={<AdminDashboard />} />
+                <Route path="/admin/products" element={<ProductsAdmin />} />
+                <Route path="/admin/products/new" element={<ProductForm />} />
+                <Route path="/admin/products/edit/:id" element={<ProductForm />} />
+                <Route path="/admin/categories" element={<CategoriesAdmin />} />
 
                 <Route path="/" element={<WelcomePage/>}/>
                 <Route path="/login" element={<LoginPage/>}/>

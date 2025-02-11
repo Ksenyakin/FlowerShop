@@ -2,9 +2,10 @@ package routes
 
 import (
 	"flower-shop-backend/handlers"
-	middleware "flower-shop-backend/middleware"
-	"github.com/gorilla/mux"
+	"flower-shop-backend/middleware"
 	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
 func SetupRoutes() *mux.Router {
@@ -17,16 +18,22 @@ func SetupRoutes() *mux.Router {
 	r.HandleFunc("/api/update_user", handlers.UpdateUser).Methods("POST") //
 
 	// Товары
-	r.HandleFunc("/api/products", handlers.GetProducts).Methods("GET")               //
-	r.HandleFunc("/api/products/{id}", handlers.GetProductByID).Methods("GET")       //
+	r.HandleFunc("/api/products", handlers.GetProducts).Methods("GET") //
+	r.HandleFunc("/api/products/{id}", handlers.GetProductByID).Methods("GET")
 	r.HandleFunc("/api/addProduct", handlers.AddProduct).Methods("POST")             //
 	r.HandleFunc("/api/products/{id:[0-9]+}", handlers.UpdateProduct).Methods("PUT") //
-	r.HandleFunc("/api/products/{id}", handlers.DeleteProduct).Methods("DELETE")     //
+	r.HandleFunc("/api/products/{id}", handlers.DeleteProduct).Methods("DELETE")
+
+	r.HandleFunc("/admin/products", handlers.GetProducts).Methods("GET")               //
+	r.HandleFunc("/admin/products/{id}", handlers.GetProductByID).Methods("GET")       //
+	r.HandleFunc("/admin/addProduct", handlers.AddProduct).Methods("POST")             //
+	r.HandleFunc("/admin/products/{id:[0-9]+}", handlers.UpdateProduct).Methods("PUT") //
+	r.HandleFunc("/admin/products/{id}", handlers.DeleteProduct).Methods("DELETE")     //
 
 	// Категории
-	r.HandleFunc("/api/categories/create", handlers.CreateCategoryHandler).Methods("POST") //
-	r.HandleFunc("/api/categories/{id:[0-9]+}", handlers.UpdateCategoryHandler).Methods("PUT")
-	r.HandleFunc("/api/categories/{id:[0-9]+}", handlers.DeleteCategoryHandler).Methods("DELETE")
+	r.HandleFunc("/api/categories", handlers.GetCategories).Methods("GET")
+	r.HandleFunc("/api/categories", middleware.RequireAdmin(handlers.AddCategory)).Methods("POST")
+	r.HandleFunc("/api/categories/{id}", middleware.RequireAdmin(handlers.UpdateCategory)).Methods("PUT")
 
 	// Категории Товаров
 	r.HandleFunc("/api/products/{product_id}/categories", handlers.GetCategoriesForProduct).Methods("GET")             //
@@ -47,10 +54,7 @@ func SetupRoutes() *mux.Router {
 	r.HandleFunc("/api/pay", handlers.ProcessPayment).Methods("POST")
 	r.HandleFunc("/api/purchase/{id}", handlers.ProcessPurchaseHandler).Methods("POST")
 
-	adminRouter := r.PathPrefix("/api/admin").Subrouter()
-	adminRouter.Use(middleware.AdminMiddleware)
-	adminRouter.HandleFunc("/products", handlers.AdminManageProducts).Methods("GET", "POST", "PUT", "DELETE")
-	adminRouter.HandleFunc("/upload", handlers.UploadImage).Methods("POST")
+	r.HandleFunc("/api/upload", middleware.RequireAdmin(handlers.UploadHandler)).Methods("POST")
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("uploads"))))
 

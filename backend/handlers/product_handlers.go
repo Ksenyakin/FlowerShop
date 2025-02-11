@@ -5,11 +5,13 @@ import (
 	"encoding/json"
 	"flower-shop-backend/models"
 	"flower-shop-backend/utils"
-	"github.com/gorilla/mux"
-	"github.com/sirupsen/logrus"
+	"fmt"
 	"log"
 	"net/http"
 	"strconv"
+
+	"github.com/gorilla/mux"
+	"github.com/sirupsen/logrus"
 )
 
 // GetProducts возвращает список продуктов
@@ -42,7 +44,7 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 			&product.CreatedAt,
 			&product.UpdatedAt); err != nil {
 			logrus.WithError(err).Error("Ошибка при чтении данных о продукте")
-			http.Error(w, "Failed to read products", http.StatusInternalServerError)
+			http.Error(w, `[]`, http.StatusOK) // ✅ Гарантируем, что `null` не попадет в ответ
 			return
 		}
 
@@ -79,25 +81,35 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddProduct(w http.ResponseWriter, r *http.Request) {
+	logrus.Info("Добавление нового товара")
+
 	var product models.Product
-
-	// Декодируем тело запроса в структуру Product
 	if err := json.NewDecoder(r.Body).Decode(&product); err != nil {
-		log.Println("Ошибка декодирования JSON:", err)
-		http.Error(w, "Неверный формат данных", http.StatusBadRequest)
+		logrus.Warn("Ошибка декодирования данных запроса: ", err)
+		http.Error(w, `{"message": "Invalid input"}`, http.StatusBadRequest)
 		return
 	}
 
-	// Вызываем функцию модели для добавления товара в базу данных
-	if err := models.CreateProduct(&product); err != nil {
-		log.Println("Ошибка добавления товара:", err)
-		http.Error(w, "Не удалось добавить товар", http.StatusInternalServerError)
+	logrus.Infof("Данные получены: %+v", product)
+
+	if product.Name == "" || product.Description == "" || product.Price <= 0 || product.Stock < 0 || product.ImageURL == "" {
+		logrus.Warn("Ошибка: не все обязательные поля заполнены")
+		http.Error(w, `{"message": "Missing required fields"}`, http.StatusBadRequest)
 		return
 	}
 
-	// Возвращаем успешный ответ
-	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(product)
+	_, err := utils.DB.Exec(`INSERT INTO products (name, description, price, stock, image_url) VALUES ($1, $2, $3, $4, $5)`,
+		product.Name, product.Description, product.Price, product.Stock, product.ImageURL)
+	if err != nil {
+		logrus.Error("Ошибка сохранения товара в БД: ", err)
+		http.Error(w, `{"message": "Failed to save product"}`, http.StatusInternalServerError)
+		return
+	}
+
+	logrus.Info("Товар успешно добавлен")
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]string{"message": "Product added successfully"})
 }
 
 func DeleteProduct(w http.ResponseWriter, r *http.Request) {
@@ -123,34 +135,33 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateProduct(w http.ResponseWriter, r *http.Request) {
-	// Получаем ID товара из параметров маршрута
-	vars := mux.Vars(r)
-	productID, err := strconv.Atoi(vars["id"]) // Конвертируем строку в число
-	if err != nil {
-		log.Println("Неверный ID товара:", err)
-		http.Error(w, "Неверный ID товара", http.StatusBadRequest)
-		return
-	}
+	productID, _ := strconv.Atoi(r.URL.Query().Get("id"))
+	logrus.Infof("Обновление товара с ID: %d", productID)
 
 	var product models.Product
-
-	// Декодируем тело запроса в структуру Product
 	if err := json.NewDecoder(r.Body).Decode(&product); err != nil {
-		log.Println("Ошибка декодирования JSON:", err)
-		http.Error(w, "Неверный формат данных", http.StatusBadRequest)
+		logrus.Warn("Ошибка декодирования JSON: ", err)
+		http.Error(w, `{"message": "Invalid input"}`, http.StatusBadRequest)
 		return
 	}
 
-	// Обновляем товар в базе данных
-	if err := models.UpdateProduct(productID, &product); err != nil {
-		log.Println("Ошибка обновления товара:", err)
-		http.Error(w, "Не удалось обновить товар", http.StatusInternalServerError)
+	// 🔥 ПРОВЕРЯЕМ category_id 🔥
+	if product.Category_id == 0 {
+		logrus.Warn("Ошибка: category_id не может быть 0")
+		http.Error(w, `{"message": "Invalid category"}`, http.StatusBadRequest)
 		return
 	}
 
-	// Возвращаем успешный ответ
+	err := models.UpdateProduct(productID, &product)
+	if err != nil {
+		logrus.Error("Ошибка обновления товара: ", err)
+		http.Error(w, `{"message": "Failed to update product"}`, http.StatusInternalServerError)
+		return
+	}
+
+	logrus.Infof("Товар с ID %d успешно обновлен", productID)
 	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(product)
+	fmt.Fprintf(w, `{"message": "Product updated successfully"}`)
 }
 
 // GetProductByID обрабатывает запрос для получения товара по его ID

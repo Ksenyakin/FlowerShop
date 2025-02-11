@@ -10,4 +10,4 @@ func GetEnv(key string, defaultValue string) string {
 	return defaultValue
 }
 
-var JWTSecret = GetEnv("JWT_SECRET", "your_secret_key_here")
+var JWTSecret = GetEnv("JWT_SECRET", "0000")

@@ -17,6 +17,7 @@ const WelcomePage: React.FC = () => {
                         <li><a href="/delivery">Доставка</a></li>
                         <li><a href="/about">О нас</a></li>
                         <li><a href="/contacts">Контакты</a></li>
+
                     </ul>
                 </nav>
                 <div className="auth-buttons">

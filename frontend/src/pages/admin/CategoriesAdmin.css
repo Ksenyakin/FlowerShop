@@ -1,0 +1,47 @@
+.categories-admin {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+}
+
+.category-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.category-form input,
+.category-form select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.category-form button {
+    background-color: #28a745;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.category-form button:hover {
+    background-color: #218838;
+}
+
+.category-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.category-table th, .category-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.category-table input,
+.category-table select {
+    width: 100%;
+    padding: 5px;
+}

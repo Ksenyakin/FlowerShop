@@ -1,69 +1,45 @@
 package models
 
-import (
-	"flower-shop-backend/utils"
-	"log"
-	"time"
-)
+import "flower-shop-backend/utils"
 
-// Структура для категории
 type Category struct {
-	ID          int       `json:"id"`
-	Name        string    `json:"name"`
-	Description string    `json:"description"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	ID          int     `json:"id"`
+	Name        string  `json:"name"`
+	Description *string `json:"description"` // Добавляем описание
+	ParentID    *int    `json:"parent_id"`   // Может быть NULL
 }
 
-// Функция для создания новой категории
-func CreateCategory(name string, description string) (int, error) {
-	var categoryID int
-
-	// SQL-запрос для вставки новой категории
-	query := `
-		INSERT INTO categories (name, description, created_at, updated_at)
-		VALUES ($1, $2, NOW(), NOW())
-		RETURNING id;`
-
-	// Выполнение запроса и получение id новой категории
-	err := utils.DB.QueryRow(query, name, description).Scan(&categoryID)
-	if err != nil {
-		log.Println("Ошибка при создании категории:", err)
-		return 0, err
-	}
-
-	return categoryID, nil
+// Добавление категории
+func AddCategory(name string, parentID *int) (int, error) {
+	var id int
+	query := `INSERT INTO categories (name, parent_id) VALUES ($1, $2) RETURNING id`
+	err := utils.DB.QueryRow(query, name, parentID).Scan(&id)
+	return id, err
 }
 
-// DeleteCategory удаляет категорию по её ID
-func DeleteCategory(categoryID int) error {
-	// SQL-запрос для удаления категории
-	query := "DELETE FROM categories WHERE id = $1"
-
-	// Выполнение запроса
-	_, err := utils.DB.Exec(query, categoryID)
+// Получение всех категорий
+func GetCategories() ([]Category, error) {
+	rows, err := utils.DB.Query(`SELECT id, name, parent_id FROM categories`)
 	if err != nil {
-		log.Println("Ошибка при удалении категории:", err)
-		return err
+		return nil, err
 	}
+	defer rows.Close()
 
-	return nil
+	var categories []Category
+	for rows.Next() {
+		var c Category
+		err := rows.Scan(&c.ID, &c.Name, &c.ParentID)
+		if err != nil {
+			return nil, err
+		}
+		categories = append(categories, c)
+	}
+	return categories, nil
 }
 
-// UpdateCategory обновляет данные категории по её ID
-func UpdateCategory(categoryID int, name string, description string) error {
-	// SQL-запрос для обновления категории
-	query := `
-		UPDATE categories
-		SET name = $1, description = $2, updated_at = NOW()
-		WHERE id = $3`
-
-	// Выполнение запроса
-	_, err := utils.DB.Exec(query, name, description, categoryID)
-	if err != nil {
-		log.Println("Ошибка при обновлении категории:", err)
-		return err
-	}
-
-	return nil
+// Обновление категории
+func UpdateCategory(id int, name string, parentID *int) error {
+	query := `UPDATE categories SET name = $1, parent_id = $2 WHERE id = $3`
+	_, err := utils.DB.Exec(query, name, parentID, id)
+	return err
 }

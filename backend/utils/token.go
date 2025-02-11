@@ -1,11 +1,13 @@
 package utils
 
 import (
-	"github.com/dgrijalva/jwt-go"
 	"os"
 	"time"
+
+	"github.com/dgrijalva/jwt-go"
 )
 
+// Config структура для хранения конфигурации
 type Config struct {
 	Secret string
 }
@@ -14,28 +16,27 @@ type Config struct {
 type Claims struct {
 	UserID int    `json:"user_id"`
 	Email  string `json:"email"`
+	Role   string `json:"role"` // Добавляем поле для роли
 	jwt.StandardClaims
 }
 
 // CreateToken создает новый JWT
-func CreateToken(userID int, email string) (string, error) {
+func CreateToken(userID int, email string, role string) (string, error) {
 	config := Config{
 		Secret: getEnv("JWT_SECRET", "0000"),
 	}
-	// Создание токена с данными пользователя и стандартными claims
+
 	claims := Claims{
 		UserID: userID,
 		Email:  email,
+		Role:   role,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(), // Токен действует 24 часа
-			Issuer:    "flowers-shop",
+			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(),
+			Issuer:    "flower-shop",
 		},
 	}
 
-	// Создание нового токена с использованием алгоритма HMAC
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
-
-	// Подписывание токена
 	signedToken, err := token.SignedString([]byte(config.Secret))
 	if err != nil {
 		return "", err
@@ -46,7 +47,6 @@ func CreateToken(userID int, email string) (string, error) {
 
 // ParseToken парсит и проверяет JWT
 func ParseToken(tokenString string) (*Claims, error) {
-
 	config := Config{
 		Secret: getEnv("JWT_SECRET", "0000"),
 	}
@@ -67,6 +67,7 @@ func ParseToken(tokenString string) (*Claims, error) {
 	return claims, nil
 }
 
+// getEnv читает переменную окружения или возвращает значение по умолчанию
 func getEnv(key, defaultVal string) string {
 	if value, exists := os.LookupEnv(key); exists {
 		return value

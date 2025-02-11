@@ -3,11 +3,13 @@ package main
 import (
 	"flower-shop-backend/routes"
 	"flower-shop-backend/utils"
-	"github.com/sirupsen/logrus"
 	"net/http"
+
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
+
 	// Инициализация базы данных
 	utils.InitDB()
 

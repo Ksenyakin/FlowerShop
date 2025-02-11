@@ -36,6 +36,7 @@ var LevelOrder = []string{InitialLevel, SilverLevel, GoldLevel}
 // User представляет структуру пользователя
 type User struct {
 	ID               int       `json:"id"`
+	Role             string    `json:"role"`
 	Email            string    `json:"email"`
 	Password         string    `json:"password"`
 	PasswordHash     string    `json:"password_hash"`
@@ -150,7 +151,7 @@ func GetUserByEmailAndPassword(email, password string) (*User, error) {
 
 	// Получаем данные пользователя по email
 	query := `
-		SELECT id, email, password_hash, name, phone, address, birthday,
+		SELECT id, role, email, password_hash, name, phone, address, birthday,
 		       total_purchases, points, loyalty_level, last_purchase_date,
 		       created_at, updated_at
 		FROM users WHERE email = $1
@@ -159,7 +160,7 @@ func GetUserByEmailAndPassword(email, password string) (*User, error) {
 
 	// Сканируем данные в структуру User
 	if err := row.Scan(
-		&user.ID, &user.Email, &user.PasswordHash, &user.Name, &user.Phone,
+		&user.ID, &user.Role, &user.Email, &user.PasswordHash, &user.Name, &user.Phone,
 		&user.Address, &user.DayOfBirthday, &user.TotalPurchases,
 		&user.Points, &user.LoyaltyLevel, &user.LastPurchaseDate,
 		&user.CreatedAt, &user.UpdatedAt,
@@ -171,6 +172,8 @@ func GetUserByEmailAndPassword(email, password string) (*User, error) {
 		logrus.Error("Ошибка при получении данных пользователя: ", err)
 		return nil, err
 	}
+
+	logrus.Infof("Роль пользователя из БД: %s", user.Role)
 
 	// Проверяем, совпадает ли введенный пароль с хэшем из базы данных
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(password)); err != nil {
@@ -188,7 +191,7 @@ func GetUserByEmail(email string) (*User, error) {
 
 	var user User
 	query := `
-		SELECT id, name, email, phone, address, birthday,
+		SELECT id, role, name, email, phone, address, birthday,
 		       total_purchases, points, loyalty_level, last_purchase_date,
 		       created_at, updated_at
 		FROM users WHERE email = $1
@@ -196,7 +199,7 @@ func GetUserByEmail(email string) (*User, error) {
 	row := utils.DB.QueryRow(query, email)
 
 	err := row.Scan(
-		&user.ID, &user.Name, &user.Email, &user.Phone, &user.Address,
+		&user.ID, &user.Role, &user.Name, &user.Email, &user.Phone, &user.Address,
 		&user.DayOfBirthday, &user.TotalPurchases, &user.Points, &user.LoyaltyLevel,
 		&user.LastPurchaseDate, &user.CreatedAt, &user.UpdatedAt,
 	)
@@ -220,7 +223,7 @@ func GetUserByID(userID int) (*User, error) {
 
 	var user User
 	query := `
-		SELECT id, name, email, phone, address, birthday,
+		SELECT id, role, name, email, phone, address, birthday,
 		       total_purchases, points, loyalty_level, last_purchase_date,
 		       created_at, updated_at
 		FROM users WHERE id = $1
@@ -228,7 +231,7 @@ func GetUserByID(userID int) (*User, error) {
 	row := utils.DB.QueryRow(query, userID)
 
 	err := row.Scan(
-		&user.ID, &user.Name, &user.Email, &user.Phone, &user.Address,
+		&user.ID, &user.Role, &user.Name, &user.Email, &user.Phone, &user.Address,
 		&user.DayOfBirthday, &user.TotalPurchases, &user.Points, &user.LoyaltyLevel,
 		&user.LastPurchaseDate, &user.CreatedAt, &user.UpdatedAt,
 	)
