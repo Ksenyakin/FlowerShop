@@ -11,28 +11,33 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import ProductsAdmin from "./pages/admin/ProductsAdmin";
 import ProductForm from "./pages/admin/ProductForm";
 import CategoriesAdmin from "./pages/admin/CategoriesAdmin";
+import DeliveryPage from "./components/DeliveryPage";
 
 
 
 const App: React.FC = () => {
     return (
         <Router>
-            <Routes>
-                {/* Админские маршруты */}
-                <Route path="/admin" element={<AdminDashboard />} />
-                <Route path="/admin/products" element={<ProductsAdmin />} />
-                <Route path="/admin/products/new" element={<ProductForm />} />
-                <Route path="/admin/products/edit/:id" element={<ProductForm />} />
-                <Route path="/admin/categories" element={<CategoriesAdmin />} />
+            <div className="container"> {/* Ограничиваем ширину всего контента */}
+                <Routes>
+                    {/* Админские маршруты */}
+                    <Route path="/admin" element={<AdminDashboard />} />
+                    <Route path="/admin/products" element={<ProductsAdmin />} />
+                    <Route path="/admin/products/new" element={<ProductForm />} />
+                    <Route path="/admin/products/edit/:id" element={<ProductForm />} />
+                    <Route path="/admin/categories" element={<CategoriesAdmin />} />
 
-                <Route path="/" element={<WelcomePage/>}/>
-                <Route path="/login" element={<LoginPage/>}/>
-                <Route path="/register" element={<RegisterPage/>}/>
-                <Route path="/profile" element={<ProfilePage/>}/>
-                <Route path="/update-user" element={<UpdateUserPage />} />
-                <Route path = "/products" element={<ProductsPage/>}/>
-                <Route path="/products/:id" element={<ProductPage/>} />
-            </Routes>
+                    <Route path="/" element={<WelcomePage/>}/>
+                    <Route path="/login" element={<LoginPage/>}/>
+                    <Route path="/register" element={<RegisterPage/>}/>
+                    <Route path="/profile" element={<ProfilePage/>}/>
+                    <Route path="/update-user" element={<UpdateUserPage />} />
+                    <Route path = "/products" element={<ProductsPage/>}/>
+                    <Route path="/products/:id" element={<ProductPage/>} />
+                    <Route path="/delivery" element={<DeliveryPage/>} />
+
+                </Routes>
+            </div>
         </Router>
     );
 };

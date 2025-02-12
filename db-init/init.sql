@@ -55,6 +55,10 @@ CREATE TABLE products (
                           description TEXT,
                           price NUMERIC(10,2) NOT NULL,
                           stock INTEGER NOT NULL DEFAULT 0,
+                          color VARCHAR(50),
+                          bouquet_type VARCHAR(50),
+                          recipient VARCHAR(50),
+                          occasion VARCHAR(50),
                           image_url VARCHAR(255),
                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                           updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

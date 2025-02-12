@@ -1,36 +1,16 @@
 import React from 'react';
-import UserDropdown from './UserDropdown';
 import './WelcomePage.css';
-import logo from './logo.png';
+import Header from "./Header";
+import Footer from "./Footer";
 
 const WelcomePage: React.FC = () => {
     return (
         <div className="welcome-page">
-            <header className="header">
-                <div className="logo">
-                    <img src={logo} alt="Логотип компании" />
-                </div>
-                <a className="company-name" href = "/">Decor Fleurs</a>
-                <nav className="nav">
-                    <ul>
-                        <li><a href="/products/">Каталог</a></li>
-                        <li><a href="/delivery">Доставка</a></li>
-                        <li><a href="/about">О нас</a></li>
-                        <li><a href="/contacts">Контакты</a></li>
-
-                    </ul>
-                </nav>
-                <div className="auth-buttons">
-                    <a href="/register" className="button">Регистрация</a>
-                    <a href="/login" className="button">Авторизация</a>
-                </div>
-                <UserDropdown />
-            </header>
-
+            <Header/>
             <div className="banner">
                 <h2>Добро пожаловать в Decor Fleurs</h2>
                 <p>Лучшие цветочные композиции для особенных моментов</p>
-                <a href="/catalog" className="button">Перейти в каталог</a>
+                <a href="/products" className="button">Перейти в каталог</a>
             </div>
 
             <main>
@@ -77,16 +57,7 @@ const WelcomePage: React.FC = () => {
                 </section>
             </main>
 
-            <footer>
-                <div className="footer-content">
-                    <p>&copy; 2024 Decor Fleurs. Все права защищены.</p>
-                    <div className="social-links">
-                        <a href="#">VK</a>
-                        <a href="#">Instagram</a>
-                        <a href="#">Facebook</a>
-                    </div>
-                </div>
-            </footer>
+            <Footer/>
         </div>
     );
 };

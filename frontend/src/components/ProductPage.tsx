@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import Header from './Header';  // ✅ Подключаем хедер
+import Footer from './Footer';  // ✅ Подключаем футер
 import './ProductPage.css';
 
 interface Product {
@@ -9,7 +11,7 @@ interface Product {
     description: string;
     price: number;
     stock: number;
-    imageUrl: string;
+    image_url: string;
     createdAt: string;
     updatedAt: string;
 }
@@ -46,12 +48,10 @@ const ProductPage: React.FC = () => {
 
     return (
         <div className="product-page">
-            <header className="header">
-                <h1 className="company-name"><Link to="/">Decor Fleurs</Link></h1>
-            </header>
+            <Header />
             <div className="product-details">
                 <img
-                    src={product.imageUrl || '/default-image.jpg'}
+                    src={product.image_url}
                     alt={product.name}
                     className="product-image"
                 />
@@ -61,9 +61,7 @@ const ProductPage: React.FC = () => {
                 <p className="product-stock">В наличии: {product.stock} шт.</p>
                 <button className="product-button">Добавить в корзину</button>
             </div>
-            <footer className="footer-content">
-                <Link to="/products">Вернуться к каталогу</Link>
-            </footer>
+            <Footer />
         </div>
     );
 };

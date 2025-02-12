@@ -1,11 +1,18 @@
+/* Ограничение ширины сайта */
+.container {
+  max-width: 1200px;  /* Или 1400px, если нужно шире */
+  margin: 0 auto;  /* Центрирование */
+  padding: 0 20px;  /* Отступы по бокам */
+}
+
+/* Убираем скролл по горизонтали */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: Arial, sans-serif;
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

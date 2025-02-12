@@ -1,8 +1,11 @@
 .welcome-page {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f9f9f9;
-    padding: 20px;
+    align-items: stretch;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .header {
