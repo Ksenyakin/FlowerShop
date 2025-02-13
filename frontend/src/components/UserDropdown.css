@@ -33,6 +33,7 @@
     cursor: pointer;
     font-size: 14px;
     text-align: left;
+    padding: 0;
 }
 
 .dropdown-menu a:hover,

@@ -12,6 +12,7 @@ import ProductsAdmin from "./pages/admin/ProductsAdmin";
 import ProductForm from "./pages/admin/ProductForm";
 import CategoriesAdmin from "./pages/admin/CategoriesAdmin";
 import DeliveryPage from "./components/DeliveryPage";
+import CartPage from "./components/CartPage";
 
 
 
@@ -35,6 +36,8 @@ const App: React.FC = () => {
                     <Route path = "/products" element={<ProductsPage/>}/>
                     <Route path="/products/:id" element={<ProductPage/>} />
                     <Route path="/delivery" element={<DeliveryPage/>} />
+                    <Route path="/cart" element={<CartPage/>} />
+
 
                 </Routes>
             </div>

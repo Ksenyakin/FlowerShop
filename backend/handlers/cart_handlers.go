@@ -115,3 +115,22 @@ func ViewCartHandler(w http.ResponseWriter, r *http.Request) {
 	// Возвращаем JSON с информацией о корзине
 	json.NewEncoder(w).Encode(cartItems)
 }
+
+func ClearCartHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	userID, err := strconv.Atoi(vars["user_id"])
+	if err != nil {
+		http.Error(w, "Invalid user ID", http.StatusBadRequest)
+		return
+	}
+
+	err = models.ClearCart(userID)
+	if err != nil {
+		log.Println("Ошибка при очистке корзины:", err)
+		http.Error(w, "Failed to clear cart", http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	json.NewEncoder(w).Encode(map[string]string{"message": "Корзина успешно очищена"})
+}

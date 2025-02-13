@@ -2,60 +2,95 @@ import React from 'react';
 import './WelcomePage.css';
 import Header from "./Header";
 import Footer from "./Footer";
+import SliderComponent from "./SliderComponent";
+import { Link } from "react-router-dom";
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
+import SliderTopProducts from "./SliderTopProducts";
 
 const WelcomePage: React.FC = () => {
     return (
         <div className="welcome-page">
             <Header/>
-            <div className="banner">
-                <h2>Добро пожаловать в Decor Fleurs</h2>
-                <p>Лучшие цветочные композиции для особенных моментов</p>
-                <a href="/products" className="button">Перейти в каталог</a>
-            </div>
+            <div className="welcome-page-container">
+                {/* Слайдер */}
+                <div className="welcome-page-slider">
+                    <SliderComponent/>
+                </div>
+                {/* Категории товаров */}
+                <div className="welcome-page-content">
+                    {[
+                        {name: "Весенние букеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/15.jpg"},
+                        {name: "Букеты на 8 марта", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/16.jpg"},
+                        {name: "Коробки с цветами", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/17.jpg"},
+                        {name: "Свадебные букеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/16.jpg"},
+                        {name: "Композиции из цветов", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/17.jpg"},
+                        {name: "Монобукеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/15.jpg"}
+                    ].map((category, index) => (
+                        <div className="category-card" key={index}>
+                            <img src={category.img} alt={category.name} className="category-image"/>
+                            <p>{category.name}</p>
+                            <Link to="/products" className="category-button">Перейти в каталог</Link>
+                        </div>
+                    ))}
+                </div>
 
-            <main>
-                <section className="categories">
-                    <h2>Популярные категории</h2>
-                    <div className="category-list">
-                        <div className="category-item">
-                            <img src="bouquets.jpg" alt="Букеты" />
-                            <p>Букеты</p>
-                        </div>
-                        <div className="category-item">
-                            <img src="roses.jpg" alt="Розы" />
-                            <p>Розы</p>
-                        </div>
-                        <div className="category-item">
-                            <img src="gifts.jpg" alt="Подарки" />
-                            <p>Подарки</p>
-                        </div>
-                    </div>
-                </section>
 
-                <section className="popular-products">
+                {/* Кнопка просмотра всех категорий */}
+                <div className="welcome-page-button">
+                    <Link to="/products" className="all-categories-button">Посмотреть все категории</Link>
+                </div>
+
+                {/* Топ товары */}
+                <div className="welcome-page-top">
                     <h2>Популярные товары</h2>
-                    <div className="product-list">
-                        <div className="product-card">
-                            <img src="product1.jpg" alt="Товар 1" />
-                            <h3>Букет "Розовая мечта"</h3>
-                            <p>2 500 ₽</p>
-                            <button className="button">Купить</button>
+                    <div className="welcome-page-top-slider">
+                        <SliderTopProducts/>
+                    </div>
+                </div>
+
+                {/* Индивидуальный букет */}
+                <div className="welcome-page-individual">
+                    <div className="welcome-page-individual-text">
+                        <h2>Вы листаете каталог и не находите «тот самый букет»?</h2>
+                        <p>Опишите пожелания, и наш флорист создаст индивидуальный букет!</p>
+                        <button className="custom-order-button">Подробнее</button>
+                    </div>
+                    <div className="welcome-page-individual-photo">
+                        <img src="/custom-bouquet.jpg" alt="Индивидуальный букет"/>
+                    </div>
+                </div>
+
+                {/* Корпоративные букеты */}
+                <div className="welcome-page-corp">
+                    <div className="welcome-page-corp-text">
+                        <h2>Поздравим ваших партнеров и коллег</h2>
+                        <p>Создадим букеты в фирменном стиле вашей компании.</p>
+                        <button className="corporate-order-button">Подробнее</button>
+                    </div>
+                    <div className="welcome-page-corp-photo">
+                        <img src="/corporate-bouquet.jpg" alt="Корпоративные букеты"/>
+                    </div>
+                </div>
+
+                {/* Способы связи */}
+                <div className="welcome-page-communication">
+                    <h2>Связаться с нами удобным способом</h2>
+                    <div className="welcome-page-communication-methods">
+                        <div className="contact-method">
+                            <FaPhone size={30}/>
+                            <p>+7(903) 44 77 333</p>
                         </div>
-                        <div className="product-card">
-                            <img src="product2.jpg" alt="Товар 2" />
-                            <h3>Букет "Красная классика"</h3>
-                            <p>3 000 ₽</p>
-                            <button className="button">Купить</button>
+                        <div className="contact-method">
+                            <FaEnvelope size={30}/>
+                            <p>info@decorfleurs.ru</p>
                         </div>
-                        <div className="product-card">
-                            <img src="product3.jpg" alt="Товар 3" />
-                            <h3>Букет "Весенний привет"</h3>
-                            <p>1 800 ₽</p>
-                            <button className="button">Купить</button>
+                        <div className="contact-method">
+                            <FaMapMarkerAlt size={30}/>
+                            <p>г. Краснодар, ул. Гидростроителей 62к1</p>
                         </div>
                     </div>
-                </section>
-            </main>
+                </div>
+            </div>
 
             <Footer/>
         </div>

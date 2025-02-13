@@ -184,6 +184,7 @@ func GetUserInfo(w http.ResponseWriter, r *http.Request) {
 
 	// Формируем ответ
 	response := map[string]interface{}{
+		"user_id":       user.ID,
 		"name":          user.Name,
 		"role":          user.Role,
 		"phone":         user.Phone,

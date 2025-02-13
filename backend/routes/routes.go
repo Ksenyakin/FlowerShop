@@ -43,6 +43,7 @@ func SetupRoutes() *mux.Router {
 	// Корзина
 	r.HandleFunc("/api/cart/{user_id:[0-9]+}/view", handlers.ViewCartHandler).Methods("GET")  //
 	r.HandleFunc("/api/cart/{user_id:[0-9]+}/add", handlers.AddToCartHandler).Methods("POST") //
+	r.HandleFunc("/api/cart/{user_id:[0-9]+}/clear", handlers.ClearCartHandler).Methods("POST")
 	r.HandleFunc("/api/cart/update/{cart_item_id:[0-9]+}", handlers.UpdateCartItemHandler).Methods("POST")
 	r.HandleFunc("/api/cart/remove/{cart_item_id:[0-9]+}", handlers.RemoveFromCartHandler).Methods("DELETE")
 

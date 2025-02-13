@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../components/ProductsPage.css";
-import UserDropdown from "./UserDropdown";
-import logo from "./logo.png";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import Header from "./Header";
