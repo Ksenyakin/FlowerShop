@@ -29,24 +29,24 @@ const SliderComponent: React.FC = () => {
     };
 
     return (
-        <div className="slider-container">
+        <div className="slick-slider-container">
             <SlickSlider {...settings}>
-                <div className="slide">
-                    <div className="slide-content">
+                <div className="slick-slide">
+                    <div className="slick-slide-content">
                         <h2>Сезонные цветы</h2>
-                        <img src={slide1} alt="Слайд 1" className="slide-image"/>
+                        <img src={slide1} alt="Слайд 1" className="slick-slide-image"/>
                     </div>
                 </div>
-                <div className="slide">
-                    <div className="slide-content">
+                <div className="slick-slide">
+                    <div className="slick-slide-content">
                         <h2>Лучшие букеты</h2>
-                        <img src={slide2} alt="Слайд 2" className="slide-image"/>
+                        <img src={slide2} alt="Слайд 2" className="slick-slide-image"/>
                     </div>
                 </div>
-                <div className="slide">
-                    <div className="slide-content">
+                <div className="slick-slide">
+                    <div className="slick-slide-content">
                         <h2>Цветы к праздникам</h2>
-                        <img src={slide3} alt="Слайд 3" className="slide-image"/>
+                        <img src={slide3} alt="Слайд 3" className="slick-slide-image"/>
                     </div>
                 </div>
             </SlickSlider>

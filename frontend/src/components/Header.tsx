@@ -4,7 +4,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
 
 
-import "./Header.css";
+import "./styles/Header.css";
 
 const Header: React.FC = () => {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!localStorage.getItem("token"));

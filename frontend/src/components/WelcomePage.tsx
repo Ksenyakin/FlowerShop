@@ -13,11 +13,13 @@ const WelcomePage: React.FC = () => {
             <Header/>
             <div className="welcome-page-container">
                 {/* Слайдер */}
-                <div className="welcome-page-slider">
+                <div className="welcome-page-slider-main">
                     <SliderComponent/>
                 </div>
                 {/* Категории товаров */}
-                <div className="welcome-page-content">
+                <div className="welcome-page-content-main">
+
+
                     {[
                         {name: "Весенние букеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/15.jpg"},
                         {name: "Букеты на 8 марта", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/16.jpg"},

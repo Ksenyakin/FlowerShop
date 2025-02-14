@@ -14,13 +14,14 @@ type Product struct {
 	Description string    `json:"description"`
 	Price       float64   `json:"price"`
 	Stock       int       `json:"stock"`
+	TopProduct  bool      `json:"top_product"`
 	ImageURL    string    `json:"image_url"`
 	CreatedAt   time.Time `json:"created_at"`
 	UpdatedAt   time.Time `json:"updated_at"`
 }
 
 func CreateProduct(product *Product) error {
-	query := "INSERT INTO products (name, description, price, stock, image_url) VALUES ($1, $2, $3, $4, $5) RETURNING id"
+	query := "INSERT INTO products (name, description, price, stock, top_product, image_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id"
 
 	// Выполняем запрос и получаем ID созданного товара
 	err := utils.DB.QueryRow(query, product.Name, product.Description, product.Price, product.Stock, product.ImageURL).Scan(&product.ID)
@@ -48,7 +49,7 @@ func DeleteProduct(productID int) error {
 func UpdateProduct(productID int, product *Product) error {
 	query := `
 		UPDATE products
-		SET category_id = $1, name = $2, description = $3, price = $4, stock = $5, image_url = $6, updated_at = NOW()
+		SET category_id = $1, name = $2, description = $3, price = $4, stock = $5, top_product = $6, image_url = $7, updated_at = NOW()
 		WHERE id = $7`
 
 	_, err := utils.DB.Exec(query,
@@ -57,6 +58,7 @@ func UpdateProduct(productID int, product *Product) error {
 		product.Description,
 		product.Price,
 		product.Stock,
+		product.TopProduct,
 		product.ImageURL,
 		productID)
 
@@ -75,7 +77,7 @@ func GetProductByID(productID int) (*Product, error) {
 	var imageURL sql.NullString  // Для возможного NULL значения image_url
 
 	// Обновляем запрос, чтобы включить category_id
-	query := "SELECT id, category_id, name, description, price, stock, image_url, created_at, updated_at FROM products WHERE id = $1"
+	query := "SELECT id, category_id, name, description, price, stock, top_product, image_url, created_at, updated_at FROM products WHERE id = $1"
 	row := utils.DB.QueryRow(query, productID)
 
 	// Сканируем строку результата запроса
@@ -86,6 +88,7 @@ func GetProductByID(productID int) (*Product, error) {
 		&product.Description,
 		&product.Price,
 		&product.Stock,
+		&product.TopProduct,
 		&imageURL, // Используем sql.NullString для поля, которое может быть NULL
 		&product.CreatedAt,
 		&product.UpdatedAt,

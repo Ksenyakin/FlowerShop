@@ -12,7 +12,7 @@ import ProductsAdmin from "./pages/admin/ProductsAdmin";
 import ProductForm from "./pages/admin/ProductForm";
 import CategoriesAdmin from "./pages/admin/CategoriesAdmin";
 import DeliveryPage from "./components/DeliveryPage";
-import CartPage from "./components/CartPage";
+import CartPage from "./pages/CartPage";
 
 
 

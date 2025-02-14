@@ -59,6 +59,7 @@ CREATE TABLE products (
                           bouquet_type VARCHAR(50),
                           recipient VARCHAR(50),
                           occasion VARCHAR(50),
+                        top_product BOOLEAN,
                           image_url VARCHAR(255),
                           created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                           updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP

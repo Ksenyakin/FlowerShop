@@ -17,7 +17,7 @@ import (
 // GetProducts возвращает список продуктов
 func GetProducts(w http.ResponseWriter, r *http.Request) {
 	// Выполняем запрос к базе данных
-	rows, err := utils.DB.Query("SELECT id, category_id, name, description, price, stock, image_url, created_at, updated_at FROM products")
+	rows, err := utils.DB.Query("SELECT id, category_id, name, description, price, stock, top_product, image_url, created_at, updated_at FROM products")
 	if err != nil {
 		logrus.WithError(err).Error("Ошибка выполнения запроса к базе данных")
 		http.Error(w, "Failed to fetch products", http.StatusInternalServerError)
@@ -40,6 +40,7 @@ func GetProducts(w http.ResponseWriter, r *http.Request) {
 			&product.Description,
 			&product.Price,
 			&product.Stock,
+			&product.TopProduct,
 			&imageURL, // Используем sql.NullString для image_url
 			&product.CreatedAt,
 			&product.UpdatedAt); err != nil {
@@ -98,7 +99,7 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err := utils.DB.Exec(`INSERT INTO products (name, description, price, stock, image_url) VALUES ($1, $2, $3, $4, $5)`,
+	_, err := utils.DB.Exec(`INSERT INTO products (name, description, price, stock, top_product, image_url) VALUES ($1, $2, $3, $4, $5)`,
 		product.Name, product.Description, product.Price, product.Stock, product.ImageURL)
 	if err != nil {
 		logrus.Error("Ошибка сохранения товара в БД: ", err)

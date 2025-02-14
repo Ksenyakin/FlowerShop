@@ -1,5 +1,5 @@
 import React from "react";
-import "./DeliveryPage.css";
+import "./styles/DeliveryPage.css";
 import Header from "./Header";
 import Footer from "./Footer";
 import { CiShop, CiPhone } from "react-icons/ci";

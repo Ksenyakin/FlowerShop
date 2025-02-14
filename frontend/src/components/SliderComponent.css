@@ -1,25 +1,24 @@
-.slider-container {
+.slick-slider-container {
     width: 100%;
     max-width: 1200px;
     margin: auto;
-    padding-top: 20px;
 }
 
 /* Каждый слайд */
-.slide {
+.slick-slide {
     position: relative;
     text-align: center;
 }
 
 /* Контент слайдера (заголовок + изображение) */
-.slide-content {
+.slick-slide-content {
     position: relative;
     display: inline-block;
     width: 100%;
 }
 
 /* Изображение */
-.slide-image {
+.slick-slide-image {
     width: 100%;
     height: 600px;
     object-fit: cover;
@@ -27,7 +26,7 @@
 }
 
 /* Текст внутри слайда */
-.slide-content h2 {
+.slick-slide-content h2 {
     position: absolute;
     top: 50%; /* Размещаем в центре */
     left: 50%;

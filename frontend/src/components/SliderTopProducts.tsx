@@ -1,81 +1,99 @@
-import React, { forwardRef } from "react";
+import React, { useEffect, useState, forwardRef } from "react";
 import Slider, { Settings } from "react-slick";
-import './SliderTopProducts.css';
-
+import { Link } from "react-router-dom";
+import AddToCartButton from "./AddToCartButton";
+import "./SliderTopProducts.css";
+import { IProduct } from "../types";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-const slide1 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/15.jpg";
-const slide2 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/16.jpg";
-const slide3 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/17.jpg";
-const slide4 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/15.jpg";
-const slide5 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/16.jpg";
-const slide6 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/17.jpg";
-
 // Оборачиваем Slider в forwardRef с явной типизацией.
-// Используем ts-ignore для подавления ошибки TS2786.
+// Используем @ts-ignore для подавления ошибки TS2786.
 const SlickSlider = forwardRef<any, Settings>((props, ref) => {
     // @ts-ignore
     return <Slider ref={ref} {...props} />;
 });
 
 const SliderTopProducts: React.FC = () => {
+    const [products, setProducts] = useState<IProduct[]>([]);
+
+    useEffect(() => {
+        fetch("/api/products")
+            .then((response) => response.json())
+            .then((data: IProduct[]) => {
+                console.log("Все товары:", data);
+                // Фильтруем товары, где top_product === true или "true"
+                const topProducts = data.filter(
+                    (product) =>
+                        product.top_product === true ||
+                        product.top_product === "true"
+                );
+                console.log("Топ товары:", topProducts);
+                setProducts(topProducts);
+            })
+            .catch((error) => {
+                console.error("Ошибка получения данных:", error);
+                // Если произошла ошибка, задаём дефолтные данные для демонстрации
+                setProducts([
+                    {
+                        id: 1,
+                        name: "Сезонные цветы",
+                        image_url: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/15.jpg",
+                        top_product: true,
+                        price: 1000,
+                    },
+                    {
+                        id: 2,
+                        name: "Лучшие букеты",
+                        image_url: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/16.jpg",
+                        top_product: true,
+                        price: 2000,
+                    },
+                    {
+                        id: 3,
+                        name: "Цветы к праздникам",
+                        image_url: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/17.jpg",
+                        top_product: true,
+                        price: 1500,
+                    },
+                ]);
+            });
+    }, []);
+
     const settings: Settings = {
-        dots: true,          // Показывать точки навигации
-        infinite: true,      // Бесконечный цикл
-        speed: 500,          // Скорость анимации
-        slidesToShow: 3,     // Сколько слайдов показывать
-        slidesToScroll: 1,   // Сколько слайдов прокручивать
-        autoplay: false,      // Авто-прокрутка
-        autoplaySpeed: 7000, // Скорость смены слайдов (мс)
-        arrows: true,        // Стрелки навигации
+        dots: true,           // Показываем точки навигации
+        infinite: true,       // Бесконечный цикл
+        speed: 500,           // Скорость анимации
+        slidesToShow: 3,      // Количество слайдов, показываемых одновременно
+        slidesToScroll: 1,    // Количество слайдов при прокрутке
+        autoplay: false,      // Авто-прокрутка отключена
+        autoplaySpeed: 7000,  // Скорость смены слайдов (если включена автопрокрутка)
+        arrows: true,         // Стрелки навигации
     };
 
     return (
         <div className="slider-container">
             <SlickSlider {...settings}>
-                <div className="slide">
-                    <div className="slide-content">
-                        <h2>Сезонные цветы</h2>
-                        <img src={slide1} alt="Слайд 1" className="slide-image"/>
+                {products.map((product, index) => (
+                    <div className="slide" key={product.id}>
+                        <div className="slide-content">
+                            <h2>{product.name}</h2>
+                            <img
+                                src={product.image_url}
+                                alt={`Слайд ${index + 1}`}
+                                className="slide-image"
+                            />
+                            <Link to={`/products/${product.id}`} className="category-button">
+                                Перейти в каталог
+                            </Link>
+                            <AddToCartButton product={product} />
+                        </div>
                     </div>
-                </div>
-                <div className="slide">
-                    <div className="slide-content">
-                        <h2>Лучшие букеты</h2>
-                        <img src={slide2} alt="Слайд 2" className="slide-image"/>
-                    </div>
-                </div>
-                <div className="slide">
-                    <div className="slide-content">
-                        <h2>Цветы к праздникам</h2>
-                        <img src={slide3} alt="Слайд 3" className="slide-image"/>
-                    </div>
-                </div>
-                <div className="slide">
-                    <div className="slide-content">
-                        <h2>Цветы к праздникам</h2>
-                        <img src={slide4} alt="Слайд 3" className="slide-image"/>
-                    </div>
-                </div>
-                <div className="slide">
-                    <div className="slide-content">
-                        <h2>Цветы к праздникам</h2>
-                        <img src={slide5} alt="Слайд 3" className="slide-image"/>
-                    </div>
-                </div>
-                <div className="slide">
-                    <div className="slide-content">
-                        <h2>Цветы к праздникам</h2>
-                        <img src={slide6} alt="Слайд 3" className="slide-image"/>
-                    </div>
-                </div>
-
+                ))}
             </SlickSlider>
         </div>
-
     );
 };
 

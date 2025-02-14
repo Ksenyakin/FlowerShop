@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './AuthForm.css';
+import './styles/AuthForm.css';
 import { useNavigate } from 'react-router-dom';
 import { SmartCaptcha } from '@yandex/smart-captcha';
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import "./ProductForm.css";
 
 interface Category {
@@ -14,8 +14,9 @@ const ProductForm: React.FC = () => {
         description: "",
         price: 0,
         stock: 0,
-        category_id: null as number | null, // ✅ Исправлено для корректной типизации
+        category_id: null as number | null,
         image_url: "",
+        topProduct: false // новое поле для галочки "топ-продукт"
     });
     const [categories, setCategories] = useState<Category[]>([]);
     const [file, setFile] = useState<File | null>(null);
@@ -31,7 +32,7 @@ const ProductForm: React.FC = () => {
                 setCategories(Array.isArray(data) ? data : []);
             } catch (error) {
                 console.error("Ошибка:", error);
-                setCategories([]); // ✅ Гарантируем, что не будет `null`
+                setCategories([]);
             }
         };
 
@@ -44,7 +45,8 @@ const ProductForm: React.FC = () => {
                     if (data) {
                         setProduct({
                             ...data,
-                            category_id: data.category_id ?? null, // ✅ Фикс, если `category_id` = `null`
+                            category_id: data.category_id ?? null,
+                            topProduct: data.topProduct ?? false
                         });
                     }
                 })
@@ -143,23 +145,42 @@ const ProductForm: React.FC = () => {
                 <label>Категория</label>
                 <select
                     value={product.category_id !== null ? product.category_id : ""}
-                    onChange={(e) => setProduct({
-                        ...product,
-                        category_id: e.target.value ? Number(e.target.value) : null
-                    })}
+                    onChange={(e) =>
+                        setProduct({
+                            ...product,
+                            category_id: e.target.value ? Number(e.target.value) : null
+                        })
+                    }
                     required
                 >
                     <option value="">Выберите категорию</option>
                     {categories.map((category) => (
                         <option key={category.id} value={category.id}>
-                            {category.parent_id ? `↳ ${category.name}` : category.name}
+                            {category.parent_id ? `${category.name}` : category.name}
                         </option>
                     ))}
                 </select>
 
+                {/* Чекбокс для topProduct */}
+                <label className="checkbox-label">
+                    <input
+                        type="checkbox"
+                        checked={product.topProduct}
+                        onChange={(e) =>
+                            setProduct({ ...product, topProduct: e.target.checked })
+                        }
+                    />
+                    Отобразить как топ-продукт
+                </label>
+
                 <label>Изображение</label>
-                <input type="file" onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)} />
-                <button type="button" className="upload-btn" onClick={handleUpload}>📤 Загрузить изображение</button>
+                <input
+                    type="file"
+                    onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
+                />
+                <button type="button" className="upload-btn" onClick={handleUpload}>
+                    📤 Загрузить изображение
+                </button>
 
                 {product.image_url && product.image_url !== "" && (
                     <div className="image-preview">
