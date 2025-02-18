@@ -6,6 +6,7 @@ import SliderComponent from "./SliderComponent";
 import { Link } from "react-router-dom";
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import SliderTopProducts from "./SliderTopProducts";
+import FeedbackForm from "./FeedbackForm";
 
 const WelcomePage: React.FC = () => {
     return (
@@ -18,7 +19,6 @@ const WelcomePage: React.FC = () => {
                 </div>
                 {/* Категории товаров */}
                 <div className="welcome-page-content-main">
-
 
                     {[
                         {name: "Весенние букеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/15.jpg"},
@@ -52,13 +52,13 @@ const WelcomePage: React.FC = () => {
 
                 {/* Индивидуальный букет */}
                 <div className="welcome-page-individual">
+                    <div className="welcome-page-individual-photo">
+                        <img src="https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/19.jpg" alt="Индивидуальный букет"/>
+                    </div>
                     <div className="welcome-page-individual-text">
                         <h2>Вы листаете каталог и не находите «тот самый букет»?</h2>
                         <p>Опишите пожелания, и наш флорист создаст индивидуальный букет!</p>
-                        <button className="custom-order-button">Подробнее</button>
-                    </div>
-                    <div className="welcome-page-individual-photo">
-                        <img src="/custom-bouquet.jpg" alt="Индивидуальный букет"/>
+                        <FeedbackForm />
                     </div>
                 </div>
 
@@ -67,10 +67,10 @@ const WelcomePage: React.FC = () => {
                     <div className="welcome-page-corp-text">
                         <h2>Поздравим ваших партнеров и коллег</h2>
                         <p>Создадим букеты в фирменном стиле вашей компании.</p>
-                        <button className="corporate-order-button">Подробнее</button>
+                        <FeedbackForm />
                     </div>
                     <div className="welcome-page-corp-photo">
-                        <img src="/corporate-bouquet.jpg" alt="Корпоративные букеты"/>
+                        <img src="https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/18.jpg" alt="Корпоративные букеты"/>
                     </div>
                 </div>
 

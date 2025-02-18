@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import "./ProductPage.css";
 import AddToCartButton from "./AddToCartButton";
-import { IProduct } from "../types";
+import {IProduct} from "../types";
 
 const ProductPage: React.FC = () => {
-    const { id } = useParams<{ id: string }>();
+    const {id} = useParams<{ id: string }>();
     const [product, setProduct] = useState<IProduct | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -71,31 +71,34 @@ const ProductPage: React.FC = () => {
     if (!product) return <div className="error">Товар не найден</div>;
 
     return (
-        <div className="product-page">
-            <Header />
-            <div className="product-details">
-                <img src={product.image_url} alt={product.name} className="product-image" />
-                <h1 className="product-name">{product.name}</h1>
-                <p className="product-description">{product.description}</p>
-                <p className="product-price">{product.price} ₽</p>
-                <p className="product-stock">В наличии: {product.stock} шт.</p>
-                <div className="quantity-container">
-                    <label htmlFor="quantity">Количество:</label>
-                    <input
-                        type="number"
-                        id="quantity"
-                        value={quantity}
-                        min="1"
-                        max={product.stock}
-                        onChange={(e) => setQuantity(Number(e.target.value))}
-                    />
+        <div>
+            <div className="product-page">
+                <Header/>
+                <div className="product-page-container">
+                    <div className="product-image-container">
+                        <img src={product.image_url} alt={product.name} className="product-image-page"/>
+                    </div>
+                    <div className="product-details">
+                        <h1 className="product-name">{product.name}</h1>
+                        <p className="product-description">{product.description}</p>
+                        <p className="product-price">{product.price} ₽</p>
+                        <p className="product-stock">В наличии: {product.stock} шт.</p>
+                        <div className="quantity-container">
+                            <label htmlFor="quantity">Количество:</label>
+                            <input
+                                type="number"
+                                id="quantity"
+                                value={quantity}
+                                min="1"
+                                max={product.stock}
+                                onChange={(e) => setQuantity(Number(e.target.value))}
+                            />
+                        </div>
+                        <AddToCartButton product={product} quantity={quantity}/>
+                    </div>
                 </div>
-                <AddToCartButton product={product} quantity={quantity} />
-                <Link to="/cart" className="go-to-cart">
-                    Перейти в корзину
-                </Link>
+                <Footer/>
             </div>
-            <Footer />
         </div>
     );
 };

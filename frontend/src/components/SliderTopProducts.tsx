@@ -2,7 +2,7 @@ import React, { useEffect, useState, forwardRef } from "react";
 import Slider, { Settings } from "react-slick";
 import { Link } from "react-router-dom";
 import AddToCartButton from "./AddToCartButton";
-import "./SliderTopProducts.css";
+import "./styles/SliderTopProducts.css";
 import { IProduct } from "../types";
 
 import "slick-carousel/slick/slick.css";
@@ -64,10 +64,10 @@ const SliderTopProducts: React.FC = () => {
 
     const settings: Settings = {
         dots: true,           // Показываем точки навигации
-        infinite: true,       // Бесконечный цикл
+        infinite: false,      // Отключаем бесконечный цикл, чтобы не было "лишнего" слайда
         speed: 500,           // Скорость анимации
-        slidesToShow: 3,      // Количество слайдов, показываемых одновременно
-        slidesToScroll: 1,    // Количество слайдов при прокрутке
+        slidesToShow: 3,      // Показываем ровно 3 слайда
+        slidesToScroll: 3,    // Прокручиваем по 3 товара сразу
         autoplay: false,      // Авто-прокрутка отключена
         autoplaySpeed: 7000,  // Скорость смены слайдов (если включена автопрокрутка)
         arrows: true,         // Стрелки навигации

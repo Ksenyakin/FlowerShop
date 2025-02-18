@@ -4,116 +4,34 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="add CartPage, update Header/Footer + WelcomePage">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/AddToCartButton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/CartInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/DeliveryInfo.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/styles/AddToCartButton.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/styles/CartInfo.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/styles/DeliveryInfo.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/CartPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/types.ts" afterDir="false" />
+    <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="Добавил пару новых багов, ну а хули">
+      <change afterPath="$PROJECT_DIR$/db_data/postmaster.pid" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/FeedbackForm.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/styles/FeedbackForm.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/handlers/product_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/handlers/product_handlers.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/product.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db-init/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/db-init/init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/1/1259" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/1/1259" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/1/2619" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/1/2619" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/1/2619_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/1/2619_fsm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/1/2619_vm" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/1/2619_vm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/1/2696" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/1/2696" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/1/2840" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/1/2840" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/1/2840_fsm" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/1/2840_fsm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/1/2840_vm" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/1/2840_vm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/1/2841" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/1/2841" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/1247" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/1247" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/1249" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/1249" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/1259" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/1259" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16385" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16385" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/16386" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16386" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16399" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16399" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16401" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16401" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16405" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16405" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16406" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16406" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16414" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16414" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16417" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16417" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/16418" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16418" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16426" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16426" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16427" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16427" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/16435" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16435" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/16436" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16436" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/16443" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16443" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/16445" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16445" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16457" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16457" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16465" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16465" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16472" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16472" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16478" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16478" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16480" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16480" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16492" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16492" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16501" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16501" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16502" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16502" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16504" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16504" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16511" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16511" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16512" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16512" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16517" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16517" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16519" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16519" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2224" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2224" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2579" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2579" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2604" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2604" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2606" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2606" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2608" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2608" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2610" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2610" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2620" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2620" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2656" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2656" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2657" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2657" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2658" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2658" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2659" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2659" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2662" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2662" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2663" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2663" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2664" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2664" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2665" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2665" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2666" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2666" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2667" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2667" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2673" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2673" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2674" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2674" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2678" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2678" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2679" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2679" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2699" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2699" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2701" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2701" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2702" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2702" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2703" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2703" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2704" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2704" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/3455" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/3455" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/5002" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/5002" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/5/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/5/pg_internal.init" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/global/1260" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/global/1260" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/global/pg_control" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/global/pg_internal.init" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/pg_stat/pgstat.stat" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/pg_stat/pgstat.stat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/pg_stat/pgstat.stat" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/pg_wal/000000010000000000000001" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/pg_wal/000000010000000000000001" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/pg_xact/0000" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/AuthForm.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/AuthForm.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/CartPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/CartPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/CartPage.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/DeliveryPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/DeliveryPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/DeliveryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DeliveryPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Footer.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/Footer.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/Header.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/LoginForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/LoginForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ProductPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ProductPage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/ProductPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ProductPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ProductsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ProductsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/RegisterForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RegisterForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SliderComponent.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SliderComponent.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SliderComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SliderComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SliderTopProducts.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SliderTopProducts.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SliderTopProducts.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/SliderTopProducts.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/SliderTopProducts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/SliderTopProducts.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/WelcomePage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/WelcomePage.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/WelcomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/WelcomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/ProductForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/ProductForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/styles/CartPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/CartPage.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +200,8 @@
     <MESSAGE value="add AdminDashboard" />
     <MESSAGE value="add DeliveryPage" />
     <MESSAGE value="add CartPage, update Header/Footer + WelcomePage" />
-    <option name="LAST_COMMIT_MESSAGE" value="add CartPage, update Header/Footer + WelcomePage" />
+    <MESSAGE value="Добавил пару новых багов, ну а хули" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил пару новых багов, ну а хули" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

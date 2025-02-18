@@ -119,11 +119,13 @@
 .welcome-page-individual, .welcome-page-corp {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
+    padding-top: 20px;
 }
 
 .welcome-page-individual-text, .welcome-page-corp-text {
     flex: 1;
+    font-size:24px
 }
 
 .welcome-page-individual-photo img, .welcome-page-corp-photo img {
