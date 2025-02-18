@@ -1,6 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import WelcomePage from './components/WelcomePage';
+import WelcomePage from './pages/WelcomePage';
 import LoginPage from './components/LoginForm'; // Пример страницы логина
 import RegisterPage from './components/RegisterForm';
 import ProfilePage from "./components/ProfilePage";
@@ -13,6 +13,9 @@ import ProductForm from "./pages/admin/ProductForm";
 import CategoriesAdmin from "./pages/admin/CategoriesAdmin";
 import DeliveryPage from "./components/DeliveryPage";
 import CartPage from "./pages/CartPage";
+import AboutPage from "./pages/AboutPage";
+import GuaranteePage from "./pages/GuaranteePage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 
 
 
@@ -37,6 +40,10 @@ const App: React.FC = () => {
                     <Route path="/products/:id" element={<ProductPage/>} />
                     <Route path="/delivery" element={<DeliveryPage/>} />
                     <Route path="/cart" element={<CartPage/>} />
+                    <Route path="/about" element={<AboutPage/>} />
+                    <Route path="/warranty" element={<GuaranteePage/>} />
+                    <Route path="/privacy" element={<PrivacyPolicyPage/>} />
+
 
 
                 </Routes>

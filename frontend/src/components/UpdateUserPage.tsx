@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { TextField, Button, Container, Typography, Alert, Box } from '@mui/material';
 
 const UpdateUserPage: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -11,7 +12,6 @@ const UpdateUserPage: React.FC = () => {
     const [error, setError] = useState('');
 
     useEffect(() => {
-        // Загрузка текущих данных пользователя при загрузке страницы
         const fetchUserData = async () => {
             try {
                 const response = await fetch('/api/userinfo', {
@@ -69,67 +69,29 @@ const UpdateUserPage: React.FC = () => {
             }
 
             setMessage('Данные успешно обновлены!');
+            setTimeout(() => {
+                window.location.href = '/profile';
+            }, 2000);
         } catch (err) {
             setError('Ошибка при обновлении данных');
         }
-        window.location.href = '/profile'
     };
 
     return (
-        <div className="update-user-page">
-            <h1>Изменение данных пользователя</h1>
-
-            {message && <p className="success-message">{message}</p>}
-            {error && <p className="error-message">{error}</p>}
-
-            <form onSubmit={handleSubmit} className="update-user-form">
-                <div className="form-group">
-                    <label htmlFor="name">Имя:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="phone">Телефон:</label>
-                    <input
-                        type="text"
-                        id="phone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="address">Адрес:</label>
-                    <input
-                        type="text"
-                        id="address"
-                        name="address"
-                        value={formData.address}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="birthday">День рождения:</label>
-                    <input
-                        type="date"
-                        id="birthday"
-                        name="birthday"
-                        value={formData.birthday}
-                        onChange={handleChange}
-                    />
-                </div>
-
-                <button type="submit" className="button">Сохранить изменения</button>
-            </form>
-        </div>
+        <Container maxWidth="sm">
+            <Box sx={{ mt: 4, p: 3, borderRadius: 2, boxShadow: 3, bgcolor: 'background.paper' }}>
+                <Typography variant="h4" gutterBottom>Изменение данных пользователя</Typography>
+                {message && <Alert severity="success">{message}</Alert>}
+                {error && <Alert severity="error">{error}</Alert>}
+                <form onSubmit={handleSubmit}>
+                    <TextField fullWidth margin="normal" label="Имя" name="name" value={formData.name} onChange={handleChange} />
+                    <TextField fullWidth margin="normal" label="Телефон" name="phone" value={formData.phone} onChange={handleChange} />
+                    <TextField fullWidth margin="normal" label="Адрес" name="address" value={formData.address} onChange={handleChange} />
+                    <TextField fullWidth margin="normal" label="День рождения" name="birthday" type="date" value={formData.birthday} onChange={handleChange} InputLabelProps={{ shrink: true }} />
+                    <Button variant="contained" color="primary" type="submit" fullWidth sx={{ mt: 2 }}>Сохранить изменения</Button>
+                </form>
+            </Box>
+        </Container>
     );
 };
 

@@ -66,7 +66,7 @@ const DeliveryPage: React.FC = () => {
                             Гидростроителей 62к1</p>
                         <div className="delivery-shop-phone">
                             <CiPhone size={30}/>
-                            <p>+7(903) 44 77 333</p>
+                            <p>+7 (903) 44 77 333</p>
                         </div>
                     </div>
                     <div className="delivery-shop-photo">

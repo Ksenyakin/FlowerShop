@@ -64,3 +64,6 @@
     display: flex;
     flex-direction: column;
 }
+.dropdown-menu a{
+    padding:5px ;
+}

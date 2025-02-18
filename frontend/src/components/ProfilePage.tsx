@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import UserDropdown from './UserDropdown';
-import './ProfilePage.css';
+import { Container, Typography, Box, Button, CircularProgress, Alert, List, ListItem, ListItemText, AppBar, Toolbar } from '@mui/material';
+import Header from "./Header";
+import Footer from "./Footer";
+
+const formatDate = (dateString: string) => {
+    const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'long', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString('ru-RU', options);
+};
 
 const ProfilePage: React.FC = () => {
     const [userData, setUserData] = useState<any>(null);
@@ -35,50 +41,36 @@ const ProfilePage: React.FC = () => {
     }, []);
 
     if (loading) {
-        return <p>Загрузка данных профиля...</p>;
+        return <CircularProgress sx={{ display: 'block', margin: '20px auto' }} />;
     }
 
     if (error) {
-        return <p className="error-message">Ошибка: {error}</p>;
+        return <Alert severity="error">Ошибка: {error}</Alert>;
     }
 
     if (!userData) {
-        return <p>Данные пользователя недоступны</p>;
+        return <Typography variant="h6">Данные пользователя недоступны</Typography>;
     }
 
     return (
-        <div className="profile-page">
-            <header className="header">
-                <h1 className="company-name">Decor Fleurs</h1>
-                <nav className="nav">
-                    <ul>
-                        <li><a href="/catalog">Каталог</a></li>
-                        <li><a href="/delivery">Доставка</a></li>
-                        <li><a href="/about">О нас</a></li>
-                    </ul>
-                </nav>
-                <div className="auth-buttons">
-                    <a href="/register" className="button">Регистрация</a>
-                    <a href="/login" className="button">Авторизация</a>
-                </div>
-                <UserDropdown />
-            </header>
+        <Container maxWidth="md">
+            <Header/>
 
-            <main>
-                <h2>Профиль пользователя</h2>
-                <div className="profile-info">
-                    <p><strong>Имя:</strong> {userData.name}</p>
-                    <p><strong>Телефон:</strong> {userData.phone}</p>
-                    <p><strong>Адрес:</strong> {userData.address}</p>
-                    <p><strong>Электронная почта:</strong> {userData.email}</p>
-                    <p><strong>День рождения:</strong> {userData.birthday}</p>
-                    <p><strong>Уровень лояльности:</strong> {userData.loyalty_level}</p>
-                    <p><strong>Бонусные баллы:</strong> {userData.points}</p>
-                </div>
-                <a href="/update-user">Редактировать данные</a>
-
-            </main>
-        </div>
+            <Box sx={{ mt: 4, p: 3, borderRadius: 2, boxShadow: 3, bgcolor: 'background.paper' }}>
+                <Typography variant="h4" gutterBottom>Профиль пользователя</Typography>
+                <List>
+                    <ListItem><ListItemText primary="Имя" secondary={userData.name} /></ListItem>
+                    <ListItem><ListItemText primary="Телефон" secondary={userData.phone} /></ListItem>
+                    <ListItem><ListItemText primary="Адрес" secondary={userData.address} /></ListItem>
+                    <ListItem><ListItemText primary="Электронная почта" secondary={userData.email} /></ListItem>
+                    <ListItem><ListItemText primary="День рождения" secondary={formatDate(userData.birthday)} /></ListItem>
+                    <ListItem><ListItemText primary="Уровень лояльности" secondary={userData.loyalty_level} /></ListItem>
+                    <ListItem><ListItemText primary="Бонусные баллы" secondary={userData.points} /></ListItem>
+                </List>
+                <Button variant="contained" color="primary" href="/update-user" sx={{ mt: 2 }}>Редактировать данные</Button>
+            </Box>
+            <Footer/>
+        </Container>
     );
 };
 
