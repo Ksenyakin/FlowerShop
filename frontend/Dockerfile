@@ -7,14 +7,14 @@ WORKDIR /app
 # Копируем package.json и package-lock.json
 COPY package*.json ./
 
+# Очищаем кэш npm перед установкой
+RUN npm cache clean --force
+
 # Устанавливаем зависимости
 RUN npm install
 
-# Убедимся, что react-scripts доступны
-RUN ls -la ./node_modules/.bin
-
 # Исправляем права доступа для всех бинарных файлов
-RUN chmod -R +x ./node_modules/.bin
+RUN chmod -R 777 ./node_modules/.bin
 
 # Проверяем права доступа для react-scripts
 RUN ls -la ./node_modules/.bin/react-scripts

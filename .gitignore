@@ -42,7 +42,3 @@ Dockerfile.old
 *.swp
 *.tmp
 *.bak
-
-# Исключаем кеш Next.js (если используется)
-.next/
-out/

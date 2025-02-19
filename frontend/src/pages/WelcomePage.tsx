@@ -84,7 +84,7 @@ const WelcomePage: React.FC = () => {
                     <div className="welcome-page-communication-methods">
                         <div className="contact-method">
                             <FaPhone size={30}/>
-                            <p>+7(903) 44 77 333</p>
+                            <p>+7 (903) 44 77 333</p>
                         </div>
                         <div className="contact-method">
                             <FaEnvelope size={30}/>
