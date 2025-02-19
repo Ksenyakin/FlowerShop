@@ -4,16 +4,27 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="add FeedbackForm">
+    <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="Добавление юридических аспектов">
       <change afterPath="$PROJECT_DIR$/db_data/postmaster.pid" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/CookieConsent.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/styles/AboutPage.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/AboutPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/GuaranteePage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/PrivacyPolicyPage.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/ImageGridPopup.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/handlers/product_handlers.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/handlers/product_handlers.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/handlers/upload_handler.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/handlers/upload_handler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/product.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/product.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/routes.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/routes.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/1247" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/1247" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/1249" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/1249" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/16386" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16386" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16406" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16406" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16418" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16418" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16435" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16435" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/16436" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16436" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16443" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16443" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16445" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16445" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2604" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2604" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2606" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2606" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_data/base/16384/2620" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/2620" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/base/5/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/5/pg_internal.init" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/global/pg_control" afterDir="false" />
@@ -21,15 +32,14 @@
       <change beforePath="$PROJECT_DIR$/db_data/pg_wal/000000010000000000000001" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/pg_wal/000000010000000000000001" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/pg_xact/0000" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/DeliveryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DeliveryPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ProfilePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ProfilePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/UpdateUserPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/UpdateUserPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/UserDropdown.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/UserDropdown.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/WelcomePage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/WelcomePage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/WelcomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/WelcomePage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/styles/CartPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/CartPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/styles/Header.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/Header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AddToCartButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AddToCartButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DeliveryPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/DeliveryPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/AdminHeader.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/AdminHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/AdminHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/ProductForm.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/ProductForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/ProductForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/ProductsAdmin.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/admin/ProductsAdmin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/admin/ProductsAdmin.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,8 +114,8 @@
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\src\components\styles" />
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\src\pages" />
+      <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\src\components\styles" />
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\public" />
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\public\icons" />
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend" />
@@ -200,7 +210,8 @@
     <MESSAGE value="add CartPage, update Header/Footer + WelcomePage" />
     <MESSAGE value="Добавил пару новых багов, ну а хули" />
     <MESSAGE value="add FeedbackForm" />
-    <option name="LAST_COMMIT_MESSAGE" value="add FeedbackForm" />
+    <MESSAGE value="Добавление юридических аспектов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавление юридических аспектов" />
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>

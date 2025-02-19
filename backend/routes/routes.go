@@ -56,6 +56,7 @@ func SetupRoutes() *mux.Router {
 	r.HandleFunc("/api/purchase/{id}", handlers.ProcessPurchaseHandler).Methods("POST")
 
 	r.HandleFunc("/api/upload", middleware.RequireAdmin(handlers.UploadHandler)).Methods("POST")
+	r.HandleFunc("/api/images", handlers.GetImages).Methods("GET")
 
 	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("uploads"))))
 

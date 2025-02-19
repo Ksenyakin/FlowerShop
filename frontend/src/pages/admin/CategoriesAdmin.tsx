@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import "./CategoriesAdmin.css";
+import { Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Select, MenuItem } from "@mui/material";
+import AdminHeader from "./AdminHeader";
 
 interface Category {
     id: number;
@@ -11,7 +12,7 @@ const CategoriesAdmin: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>([]);
     const [newCategory, setNewCategory] = useState("");
     const [parentID, setParentID] = useState<number | null>(null);
-    const [editCategory, setEditCategory] = useState<Category | null>(null); // ✅ Добавлено
+    const [editCategory, setEditCategory] = useState<Category | null>(null);
 
     useEffect(() => {
         fetch("/api/categories")
@@ -20,7 +21,6 @@ const CategoriesAdmin: React.FC = () => {
             .catch((err) => console.error("Ошибка:", err));
     }, []);
 
-    // Получаем название родительской категории
     const getParentCategoryName = (parent_id: number | null) => {
         if (!parent_id) return "—";
         const parent = categories.find((cat) => cat.id === parent_id);
@@ -29,7 +29,6 @@ const CategoriesAdmin: React.FC = () => {
 
     const handleAddCategory = async () => {
         if (!newCategory.trim()) return;
-
         try {
             const response = await fetch("/api/categories", {
                 method: "POST",
@@ -41,7 +40,6 @@ const CategoriesAdmin: React.FC = () => {
             });
 
             if (!response.ok) throw new Error("Ошибка при добавлении категории");
-
             window.location.reload();
         } catch (error) {
             console.error("Ошибка при добавлении категории:", error);
@@ -49,8 +47,7 @@ const CategoriesAdmin: React.FC = () => {
     };
 
     const handleUpdateCategory = async () => {
-        if (!editCategory) return; // ✅ Проверяем, есть ли выбранная категория для редактирования
-
+        if (!editCategory) return;
         try {
             const response = await fetch(`/api/categories/${editCategory.id}`, {
                 method: "PUT",
@@ -62,7 +59,6 @@ const CategoriesAdmin: React.FC = () => {
             });
 
             if (!response.ok) throw new Error("Ошибка при изменении категории");
-
             window.location.reload();
         } catch (error) {
             console.error("Ошибка изменения категории:", error);
@@ -70,86 +66,63 @@ const CategoriesAdmin: React.FC = () => {
     };
 
     return (
-        <div className="categories-admin">
-            <h1>Управление категориями</h1>
-            <button onClick={() => window.history.back()} className="back-btn">⬅ Назад</button>
-
-            <div className="category-form">
-                <input
-                    type="text"
-                    placeholder="Название категории"
-                    value={newCategory}
-                    onChange={(e) => setNewCategory(e.target.value)}
-                />
-                <select onChange={(e) => setParentID(e.target.value ? Number(e.target.value) : null)}>
-                    <option value="">Без родительской категории</option>
-                    {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
-                            {category.name}
-                        </option>
-                    ))}
-                </select>
-                <button onClick={handleAddCategory}>Добавить категорию</button>
-            </div>
-
-            <table className="category-table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Название</th>
-                    <th>Родительская категория</th>
-                    <th>Действия</th>
-                </tr>
-                </thead>
-                <tbody>
+        <Container maxWidth="md">
+            <AdminHeader title="Управление категориями" />
+            <Typography variant="h4" gutterBottom>Категории</Typography>
+            <TextField fullWidth label="Название категории" value={newCategory} onChange={(e) => setNewCategory(e.target.value)} sx={{ mb: 2 }} />
+            <Select fullWidth value={parentID || ""} onChange={(e) => setParentID(e.target.value ? Number(e.target.value) : null)} sx={{ mb: 2 }}>
+                <MenuItem value="">Без родительской категории</MenuItem>
                 {categories.map((category) => (
-                    <tr key={category.id}>
-                        <td>{category.id}</td>
-                        <td>
-                            {editCategory && editCategory.id === category.id ? (
-                                <input
-                                    type="text"
-                                    value={editCategory.name}
-                                    onChange={(e) => setEditCategory({ ...editCategory, name: e.target.value })}
-                                />
-                            ) : (
-                                category.name
-                            )}
-                        </td>
-                        <td>
-                            {editCategory && editCategory.id === category.id ? (
-                                <select
-                                    value={editCategory.parent_id || ""}
-                                    onChange={(e) =>
-                                        setEditCategory({
-                                            ...editCategory,
-                                            parent_id: e.target.value ? Number(e.target.value) : null,
-                                        })
-                                    }
-                                >
-                                    <option value="">Без родительской категории</option>
-                                    {categories.map((cat) => (
-                                        <option key={cat.id} value={cat.id}>
-                                            {cat.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            ) : (
-                                getParentCategoryName(category.parent_id)
-                            )}
-                        </td>
-                        <td>
-                            {editCategory && editCategory.id === category.id ? (
-                                <button onClick={handleUpdateCategory}>💾 Сохранить</button>
-                            ) : (
-                                <button onClick={() => setEditCategory(category)}>✏️ Изменить</button>
-                            )}
-                        </td>
-                    </tr>
+                    <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
                 ))}
-                </tbody>
-            </table>
-        </div>
+            </Select>
+            <Button variant="contained" color="primary" onClick={handleAddCategory} sx={{ mb: 2 }}>Добавить категорию</Button>
+            <TableContainer component={Paper}>
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>ID</TableCell>
+                            <TableCell>Название</TableCell>
+                            <TableCell>Родительская категория</TableCell>
+                            <TableCell>Действия</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {categories.map((category) => (
+                            <TableRow key={category.id}>
+                                <TableCell>{category.id}</TableCell>
+                                <TableCell>
+                                    {editCategory && editCategory.id === category.id ? (
+                                        <TextField fullWidth value={editCategory.name} onChange={(e) => setEditCategory({ ...editCategory, name: e.target.value })} />
+                                    ) : (
+                                        category.name
+                                    )}
+                                </TableCell>
+                                <TableCell>
+                                    {editCategory && editCategory.id === category.id ? (
+                                        <Select fullWidth value={editCategory.parent_id || ""} onChange={(e) => setEditCategory({ ...editCategory, parent_id: e.target.value ? Number(e.target.value) : null })}>
+                                            <MenuItem value="">Без родительской категории</MenuItem>
+                                            {categories.map((cat) => (
+                                                <MenuItem key={cat.id} value={cat.id}>{cat.name}</MenuItem>
+                                            ))}
+                                        </Select>
+                                    ) : (
+                                        getParentCategoryName(category.parent_id)
+                                    )}
+                                </TableCell>
+                                <TableCell>
+                                    {editCategory && editCategory.id === category.id ? (
+                                        <Button variant="contained" color="success" onClick={handleUpdateCategory}>💾 Сохранить</Button>
+                                    ) : (
+                                        <Button variant="contained" onClick={() => setEditCategory(category)}>✏️ Изменить</Button>
+                                    )}
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Container>
     );
 };
 

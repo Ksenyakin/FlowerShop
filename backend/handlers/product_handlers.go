@@ -136,8 +136,14 @@ func DeleteProduct(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateProduct(w http.ResponseWriter, r *http.Request) {
-	productID, _ := strconv.Atoi(r.URL.Query().Get("id"))
-	logrus.Infof("Обновление товара с ID: %d", productID)
+	vars := mux.Vars(r)
+	productID, err := strconv.Atoi(vars["id"])
+
+	if err != nil {
+		logrus.WithError(err).Error("Ошибка преобразования ID товара")
+		http.Error(w, `{"message": "Invalid product ID"}`, http.StatusBadRequest)
+		return
+	}
 
 	var product models.Product
 	if err := json.NewDecoder(r.Body).Decode(&product); err != nil {
@@ -153,7 +159,8 @@ func UpdateProduct(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := models.UpdateProduct(productID, &product)
+	err = models.UpdateProduct(productID, &product)
+
 	if err != nil {
 		logrus.Error("Ошибка обновления товара: ", err)
 		http.Error(w, `{"message": "Failed to update product"}`, http.StatusInternalServerError)

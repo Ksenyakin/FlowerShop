@@ -11,7 +11,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import ProductsAdmin from "./pages/admin/ProductsAdmin";
 import ProductForm from "./pages/admin/ProductForm";
 import CategoriesAdmin from "./pages/admin/CategoriesAdmin";
-import DeliveryPage from "./components/DeliveryPage";
+import DeliveryPage from "./pages/DeliveryPage";
 import CartPage from "./pages/CartPage";
 import AboutPage from "./pages/AboutPage";
 import GuaranteePage from "./pages/GuaranteePage";

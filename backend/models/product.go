@@ -47,10 +47,11 @@ func DeleteProduct(productID int) error {
 }
 
 func UpdateProduct(productID int, product *Product) error {
+
 	query := `
-		UPDATE products
-		SET category_id = $1, name = $2, description = $3, price = $4, stock = $5, top_product = $6, image_url = $7, updated_at = NOW()
-		WHERE id = $7`
+    UPDATE products
+    SET category_id = $1, name = $2, description = $3, price = $4, stock = $5, top_product = $6, image_url = $7, updated_at = NOW()
+    WHERE id = $8`
 
 	_, err := utils.DB.Exec(query,
 		product.Category_id,

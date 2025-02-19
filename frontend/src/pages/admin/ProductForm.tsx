@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import "./ProductForm.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { Container, TextField, Button, FormControl, InputLabel, Select, MenuItem, Checkbox, FormControlLabel, Typography, Box } from "@mui/material";
+import ImageGridPopup from "../../components/ImageGridPopup";
 
 interface Category {
     id: number;
@@ -16,9 +17,10 @@ const ProductForm: React.FC = () => {
         stock: 0,
         category_id: null as number | null,
         image_url: "",
-        topProduct: false // новое поле для галочки "топ-продукт"
+        top_product: false
     });
     const [categories, setCategories] = useState<Category[]>([]);
+    const [isS3ModalOpen, setIsS3ModalOpen] = useState<boolean>(false);
     const [file, setFile] = useState<File | null>(null);
     const navigate = useNavigate();
     const { id } = useParams();
@@ -81,6 +83,11 @@ const ProductForm: React.FC = () => {
         }
     };
 
+    const handleSelectS3Image = (url: string) => {
+        setProduct({ ...product, image_url: url });
+        setIsS3ModalOpen(false);
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const method = id ? "PUT" : "POST";
@@ -104,93 +111,30 @@ const ProductForm: React.FC = () => {
     };
 
     return (
-        <div className="product-form-container">
-            <h1>{id ? "Редактировать товар" : "Добавить товар"}</h1>
-            <form onSubmit={handleSubmit} className="product-form">
-                <label>Название</label>
-                <input
-                    type="text"
-                    placeholder="Введите название"
-                    value={product.name}
-                    onChange={(e) => setProduct({ ...product, name: e.target.value })}
-                    required
-                />
-
-                <label>Описание</label>
-                <textarea
-                    placeholder="Введите описание"
-                    value={product.description}
-                    onChange={(e) => setProduct({ ...product, description: e.target.value })}
-                    required
-                />
-
-                <label>Цена</label>
-                <input
-                    type="number"
-                    placeholder="Введите цену"
-                    value={product.price}
-                    onChange={(e) => setProduct({ ...product, price: Number(e.target.value) })}
-                    required
-                />
-
-                <label>Остаток</label>
-                <input
-                    type="number"
-                    placeholder="Введите количество"
-                    value={product.stock}
-                    onChange={(e) => setProduct({ ...product, stock: Number(e.target.value) })}
-                    required
-                />
-
-                <label>Категория</label>
-                <select
-                    value={product.category_id !== null ? product.category_id : ""}
-                    onChange={(e) =>
-                        setProduct({
-                            ...product,
-                            category_id: e.target.value ? Number(e.target.value) : null
-                        })
-                    }
-                    required
-                >
-                    <option value="">Выберите категорию</option>
-                    {categories.map((category) => (
-                        <option key={category.id} value={category.id}>
-                            {category.parent_id ? `${category.name}` : category.name}
-                        </option>
-                    ))}
-                </select>
-
-                {/* Чекбокс для topProduct */}
-                <label className="checkbox-label">
-                    <input
-                        type="checkbox"
-                        checked={product.topProduct}
-                        onChange={(e) =>
-                            setProduct({ ...product, topProduct: e.target.checked })
-                        }
-                    />
-                    Отобразить как топ-продукт
-                </label>
-
-                <label>Изображение</label>
-                <input
-                    type="file"
-                    onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)}
-                />
-                <button type="button" className="upload-btn" onClick={handleUpload}>
-                    📤 Загрузить изображение
-                </button>
-
-                {product.image_url && product.image_url !== "" && (
-                    <div className="image-preview">
-                        <img src={product.image_url} alt="Товар" />
-                    </div>
-                )}
-
-                <button type="submit" className="save-btn">Сохранить</button>
-            </form>
-        </div>
+        <Container maxWidth="md">
+            <Typography variant="h4" gutterBottom>{id ? "Редактировать товар" : "Добавить товар"}</Typography>
+            <Box component="form" onSubmit={handleSubmit} sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+                <TextField label="Название" value={product.name} onChange={(e) => setProduct({ ...product, name: e.target.value })} required fullWidth />
+                <TextField label="Описание" value={product.description} onChange={(e) => setProduct({ ...product, description: e.target.value })} required fullWidth multiline rows={4} />
+                <TextField label="Цена" type="number" value={product.price} onChange={(e) => setProduct({ ...product, price: Number(e.target.value) })} required fullWidth />
+                <TextField label="Остаток" type="number" value={product.stock} onChange={(e) => setProduct({ ...product, stock: Number(e.target.value) })} required fullWidth />
+                <FormControl fullWidth>
+                    <InputLabel>Категория</InputLabel>
+                    <Select value={product.category_id || ""} onChange={(e) => setProduct({ ...product, category_id: e.target.value ? Number(e.target.value) : null })} required>
+                        {categories.map((category) => (
+                            <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControl>
+                <FormControlLabel control={<Checkbox checked={product.top_product} onChange={(e) => setProduct({ ...product, top_product: e.target.checked })} />} label="Отобразить как топ-продукт" />
+                <input type="file" onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)} />
+                <Button variant="contained" color="secondary" onClick={handleUpload}>📤 Загрузить изображение в S3</Button>
+                <Button variant="contained" color="primary" onClick={() => setIsS3ModalOpen(true)}>📷 Выбрать изображение из S3</Button>
+                {product.image_url && <Box sx={{ textAlign: "center" }}><img src={product.image_url} alt="Товар" style={{ maxWidth: "100%", borderRadius: "8px" }} /></Box>}
+                <Button type="submit" variant="contained" color="success">Сохранить</Button>
+            </Box>
+            {isS3ModalOpen && <ImageGridPopup onClose={() => setIsS3ModalOpen(false)} onSelect={handleSelectS3Image} />}
+        </Container>
     );
 };
 

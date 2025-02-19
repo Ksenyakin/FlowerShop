@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "./AdminHeader.css";
+import { AppBar, Toolbar, Typography, Button, Box, Container } from "@mui/material";
 
 const AdminHeader: React.FC<{ title: string }> = ({ title }) => {
     const navigate = useNavigate();
@@ -11,15 +11,19 @@ const AdminHeader: React.FC<{ title: string }> = ({ title }) => {
     };
 
     return (
-        <header className="admin-header">
-            <h1>{title}</h1>
-            <nav>
-                <button onClick={() => navigate("/admin/products")}>📦 Товары</button>
-                <button onClick={() => navigate("/admin/categories")}>📂 Категории</button>
-                <button onClick={() => navigate("/")}>🏠 На сайт</button>
-                <button onClick={handleLogout} className="logout-btn">🚪 Выйти</button>
-            </nav>
-        </header>
+        <AppBar position="static" sx={{ backgroundColor: "#2c3e50", boxShadow: 3 }}>
+            <Container>
+                <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <Typography variant="h6" sx={{ fontWeight: "bold", color: "#ecf0f1" }}>{title}</Typography>
+                    <Box>
+                        <Button color="inherit" sx={{ mx: 1 }} onClick={() => navigate("/admin/products")}>📦 Товары</Button>
+                        <Button color="inherit" sx={{ mx: 1 }} onClick={() => navigate("/admin/categories")}>📂 Категории</Button>
+                        <Button color="inherit" sx={{ mx: 1 }} onClick={() => navigate("/")}>🏠 На сайт</Button>
+                        <Button color="error" sx={{ ml: 2, fontWeight: "bold" }} onClick={handleLogout}>🚪 Выйти</Button>
+                    </Box>
+                </Toolbar>
+            </Container>
+        </AppBar>
     );
 };
 

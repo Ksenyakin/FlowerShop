@@ -173,22 +173,16 @@ func GetUserByEmailAndPassword(email, password string) (*User, error) {
 		return nil, err
 	}
 
-	logrus.Infof("Роль пользователя из БД: %s", user.Role)
-
 	// Проверяем, совпадает ли введенный пароль с хэшем из базы данных
 	if err := bcrypt.CompareHashAndPassword([]byte(user.PasswordHash), []byte(password)); err != nil {
 		logrus.Warn("Пароли не совпадают для email: ", email)
 		return nil, errors.New("invalid email or password")
 	}
-
-	logrus.Info("Пользователь успешно получен: ", user.Email)
 	return &user, nil
 }
 
 // Получение пользователя по email
 func GetUserByEmail(email string) (*User, error) {
-	logrus.Info("Поиск пользователя по email: ", email)
-
 	var user User
 	query := `
 		SELECT id, role, name, email, phone, address, birthday,

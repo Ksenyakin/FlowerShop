@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import AdminHeader from "./AdminHeader"; // ✅ Добавляем импорт
-import "./ProductsAdmin.css";
+import { Container, Typography, Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, CircularProgress, Dialog, DialogContent, Checkbox } from "@mui/material";
+import AdminHeader from "./AdminHeader";
 
 interface Product {
     id: number;
@@ -10,6 +10,7 @@ interface Product {
     price: number;
     stock: number;
     image_url: string;
+    top_product: boolean;
 }
 
 const ProductsAdmin: React.FC = () => {
@@ -49,61 +50,65 @@ const ProductsAdmin: React.FC = () => {
         }
     };
 
-    if (loading) return <h1>Загрузка...</h1>;
+    if (loading) return <CircularProgress sx={{ display: "block", margin: "20px auto" }} />;
 
     return (
-        <>
+        <Container maxWidth="lg">
             <AdminHeader title="Управление товарами" />
-            <div className="admin-page-content">
-                <button onClick={() => navigate("/admin/products/new")} className="add-btn">➕ Добавить товар</button>
+            <Typography variant="h4" gutterBottom>Список товаров</Typography>
+            <Button variant="contained" color="primary" onClick={() => navigate("/admin/products/new")} sx={{ mb: 2 }}>
+                ➕ Добавить товар
+            </Button>
 
-                {products.length === 0 ? <p>Нет товаров</p> : (
-                    <table className="products-table">
-                        <thead>
-                        <tr>
-                            <th>Фото</th>
-                            <th>Название</th>
-                            <th>Описание</th>
-                            <th>Цена</th>
-                            <th>Остаток</th>
-                            <th>Действия</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {products.map((product) => (
-                            <tr key={product.id}>
-                                <td>
-                                    <img
-                                        src={product.image_url}
-                                        alt={product.name}
-                                        className="product-image"
-                                        onClick={() => setSelectedImage(product.image_url)}
-                                    />
-                                </td>
-                                <td>{product.name}</td>
-                                <td>{product.description}</td>
-                                <td>{product.price} ₽</td>
-                                <td>{product.stock}</td>
-                                <td>
-                                    <button onClick={() => navigate(`/admin/products/edit/${product.id}`)}>✏️ Изменить</button>
-                                    <button onClick={() => handleDelete(product.id)}>🗑 Удалить</button>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                )}
+            {products.length === 0 ? <Typography>Нет товаров</Typography> : (
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Фото</TableCell>
+                                <TableCell>Название</TableCell>
+                                <TableCell>Описание</TableCell>
+                                <TableCell>Цена</TableCell>
+                                <TableCell>Остаток</TableCell>
+                                <TableCell>Топ-продукт</TableCell>
+                                <TableCell>Действия</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {products.map((product) => (
+                                <TableRow key={product.id}>
+                                    <TableCell>
+                                        <img
+                                            src={product.image_url}
+                                            alt={product.name}
+                                            style={{ width: 50, cursor: "pointer" }}
+                                            onClick={() => setSelectedImage(product.image_url)}
+                                        />
+                                    </TableCell>
+                                    <TableCell>{product.name}</TableCell>
+                                    <TableCell>{product.description}</TableCell>
+                                    <TableCell>{product.price} ₽</TableCell>
+                                    <TableCell>{product.stock}</TableCell>
+                                    <TableCell>
+                                        <Checkbox checked={product.top_product} disabled />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button onClick={() => navigate(`/admin/products/edit/${product.id}`)}>✏️ Изменить</Button>
+                                        <Button onClick={() => handleDelete(product.id)} color="error">🗑 Удалить</Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            )}
 
-                {/* Оверлей для увеличенного фото */}
-                {selectedImage && (
-                    <div className="image-overlay" onClick={() => setSelectedImage(null)}>
-                        <div className="image-container">
-                            <img src={selectedImage} alt="Товар" />
-                        </div>
-                    </div>
-                )}
-            </div>
-        </>
+            <Dialog open={!!selectedImage} onClose={() => setSelectedImage(null)}>
+                <DialogContent>
+                    <img src={selectedImage || ""} alt="Товар" style={{ maxWidth: "100%" }} />
+                </DialogContent>
+            </Dialog>
+        </Container>
     );
 };
 

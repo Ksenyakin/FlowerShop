@@ -53,11 +53,7 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, quantity = 1
                 .then((userData) => {
                     if (userData.user_id) {
                         setUserId(userData.user_id);
-                        console.log("userId получен:", userData.user_id);
                     }
-                })
-                .catch((error) => {
-                    console.error("Ошибка при загрузке userId:", error);
                 });
         }
     }, []);
@@ -67,11 +63,6 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, quantity = 1
         if (token && userId) {
             // Пользователь авторизован — сохраняем корзину в БД
             try {
-                console.log("Отправляем в корзину (БД):", {
-                    user_id: userId,
-                    product_id: product.id,
-                    quantity: quantity,
-                });
                 const response = await fetch(
                     `/api/cart/${userId}/add?product_id=${product.id}&quantity=${quantity}`,
                     {
@@ -85,7 +76,6 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, quantity = 1
                     const errorText = await response.text();
                     throw new Error(`Ошибка при добавлении в корзину: ${errorText}`);
                 }
-                alert("Товар добавлен в корзину (БД)!");
             } catch (error) {
                 console.error("Ошибка при добавлении товара в корзину (БД):", error);
                 alert("Ошибка при добавлении товара. Попробуйте снова.");
@@ -108,7 +98,6 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, quantity = 1
             }
             saveCartToLocalStorage(cart);
             setCartCookie(cart);
-            alert("Товар добавлен в корзину (локально)!");
         }
     };
 
