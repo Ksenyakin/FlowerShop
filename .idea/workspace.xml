@@ -5,19 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="Изменение админки">
-      <change afterPath="$PROJECT_DIR$/db_data/pg_stat/pgstat.stat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16405" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16405" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16406" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16406" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16414" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16414" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/16418" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/16418" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/16384/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/16384/pg_internal.init" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/base/5/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/base/5/pg_internal.init" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/global/pg_control" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/global/pg_control" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/global/pg_internal.init" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/global/pg_internal.init" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/pg_wal/000000010000000000000001" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/pg_wal/000000010000000000000001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/pg_xact/0000" beforeDir="false" afterPath="$PROJECT_DIR$/db_data/pg_xact/0000" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_data/postmaster.pid" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dockerignore" beforeDir="false" afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/deploy.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/deploy.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

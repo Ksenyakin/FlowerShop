@@ -1,7 +1,32 @@
-.idea
-node_modules/
-db_data/
-build/
-nginx.conf
-Dockerfile
-docker-compose.yml
+# Исключаем Git-файлы
+.git
+.gitignore
+
+# Исключаем node_modules (если есть фронтенд на React/Vue/Angular)
+node_modules
+
+# Исключаем зависимости Go (если используется Go)
+vendor
+
+# Исключаем логи
+*.log
+logs/
+debug.log
+
+# Исключаем временные файлы
+*.tmp
+*.swp
+.DS_Store
+.vscode/
+.idea/
+
+# Исключаем Docker-артефакты
+docker-compose.override.yml
+docker-compose.dev.yml
+.env
+.env.local
+.env.production
+Dockerfile.old
+
+# Исключаем файлы CI/CD (если они не нужны в образе)
+.github/
