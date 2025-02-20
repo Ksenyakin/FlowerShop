@@ -92,7 +92,7 @@ const WelcomePage: React.FC = () => {
                         </div>
                         <div className="contact-method">
                             <FaMapMarkerAlt size={30}/>
-                            <p>г.Краснодар, ул. Гидростроителей 62к1</p>
+                            <p>г. Краснодар, ул. Гидростроителей 62к1</p>
                         </div>
                     </div>
                 </div>
