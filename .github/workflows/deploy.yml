@@ -28,7 +28,8 @@ jobs:
 
       - name: Установить SSH-ключ
         run: |
-          echo "$SSH_KEY" > private_key && chmod 600 private_key
+          echo "$SSH_KEY" > private_key
+          chmod 600 private_key
 
       - name: Перезапустить контейнеры на сервере
         run: |
@@ -37,11 +38,11 @@ jobs:
             docker-compose pull
             docker-compose down
             docker-compose up -d
-          EOF
+  EOF
 
-    env:
-      SSH_HOST: ${{ secrets.SSH_HOST }}
-      SSH_USER: ${{ secrets.SSH_USER }}
-      SSH_KEY: ${{ secrets.SSH_KEY }}
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+env:
+  SSH_HOST: ${{ secrets.SSH_HOST }}
+  SSH_USER: ${{ secrets.SSH_USER }}
+  SSH_KEY: ${{ secrets.SSH_KEY }}
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
