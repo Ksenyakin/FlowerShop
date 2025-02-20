@@ -29,7 +29,7 @@ RUN chmod +x /app/node_modules/.bin/react-scripts
 COPY . .
 
 # Запускаем сборку проекта (используем абсолютный путь)
-RUN /app/node_modules/.bin/react-scripts build
+RUN node /app/node_modules/react-scripts/bin/react-scripts.js build
 
 # Этап запуска
 FROM nginx:stable-alpine
