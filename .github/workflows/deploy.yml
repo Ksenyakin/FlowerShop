@@ -8,41 +8,39 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    env:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     steps:
-      - name: Checkout репозитория
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Войти в Docker Hub
+      - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Собрать и запушить backend
+      - name: Build and push backend
         run: |
           docker build -t danks25/backend:latest -f backend/Dockerfile ./backend
           docker push danks25/backend:latest
 
-      - name: Собрать и запушить frontend
+      - name: Build and push frontend
         run: |
           docker build -t danks25/frontend:latest -f frontend/Dockerfile ./frontend
           docker push danks25/frontend:latest
 
-      - name: Установить SSH-ключ
+      - name: Setup SSH key
         run: |
-          echo "$SSH_KEY" > private_key
+          echo "${{ secrets.SSH_KEY }}" > private_key
           chmod 600 private_key
 
-      - name: Перезапустить контейнеры на сервере
+      - name: Restart containers on server
         run: |
-          ssh -i private_key -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST << 'EOF'
+          ssh -i private_key -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST <<'EOF'
             cd /home/root
             docker-compose pull
             docker-compose down
             docker-compose up -d
-  EOF
-
-env:
-  SSH_HOST: ${{ secrets.SSH_HOST }}
-  SSH_USER: ${{ secrets.SSH_USER }}
-  SSH_KEY: ${{ secrets.SSH_KEY }}
-  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+            EOF
