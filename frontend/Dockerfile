@@ -7,23 +7,29 @@ WORKDIR /app
 # Копируем package.json и package-lock.json
 COPY package*.json ./
 
-# Очищаем кэш npm перед установкой
+# Очищаем кеш npm перед установкой
 RUN npm cache clean --force
 
 # Устанавливаем зависимости
 RUN npm install
 
-# Исправляем права доступа для всех бинарных файлов
-RUN chmod -R 777 ./node_modules/.bin
+# Проверяем, где установлены бинарные файлы
+RUN ls -la /app/node_modules/.bin
 
-# Проверяем права доступа для react-scripts
-RUN ls -la ./node_modules/.bin/react-scripts
+# Исправляем права на всю папку `node_modules`
+RUN chmod -R 777 /app/node_modules
+
+# Проверяем права на `react-scripts`
+RUN ls -la /app/node_modules/.bin/react-scripts
+
+# Убеждаемся, что `react-scripts` можно выполнить
+RUN chmod +x /app/node_modules/.bin/react-scripts
 
 # Копируем весь проект в контейнер
 COPY . .
 
-# Собираем проект
-RUN npm run build
+# Запускаем сборку проекта (используем абсолютный путь)
+RUN /app/node_modules/.bin/react-scripts build
 
 # Этап запуска
 FROM nginx:stable-alpine
