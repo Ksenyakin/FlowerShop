@@ -48,10 +48,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - backend
     networks:
       - app-network
+    volumes:
+      - ./certs:/etc/nginx/certs  # Монтирование папки с сертификатами
 
 networks:
   app-network:
