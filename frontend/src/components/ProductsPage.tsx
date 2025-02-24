@@ -58,6 +58,7 @@ const ProductsPage: React.FC = () => {
     useEffect(() => {
         const filtered = products.filter((product) => {
             return (
+                product.stock > 0 && // только товары с остатком больше нуля
                 product.price >= priceRange[0] &&
                 product.price <= priceRange[1] &&
                 (selectedColor ? product.color === selectedColor : true) &&
@@ -68,6 +69,7 @@ const ProductsPage: React.FC = () => {
         });
         setFilteredProducts(filtered);
     }, [priceRange, selectedColor, selectedBouquetType, selectedRecipient, selectedOccasion, products]);
+
 
     const resetFilters = () => {
         setPriceRange([0, 20000]);
