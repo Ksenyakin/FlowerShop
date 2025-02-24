@@ -100,7 +100,7 @@ func AddProduct(w http.ResponseWriter, r *http.Request) {
 	}
 
 	_, err := utils.DB.Exec(`INSERT INTO products (name, description, price, stock, top_product, image_url) VALUES ($1, $2, $3, $4, $5, $6)`,
-		product.Name, product.Description, product.Price, product.Stock, product.ImageURL)
+		product.Name, product.Description, product.Price, product.Stock, product.TopProduct, product.ImageURL)
 	if err != nil {
 		logrus.Error("Ошибка сохранения товара в БД: ", err)
 		http.Error(w, `{"message": "Failed to save product"}`, http.StatusInternalServerError)
