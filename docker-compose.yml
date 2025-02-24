@@ -54,7 +54,7 @@ services:
     networks:
       - app-network
     volumes:
-      - ./certs:/etc/nginx/certs  # Монтирование папки с сертификатами
+      - ./certs:/etc/letsencrypt
 
 networks:
   app-network:
