@@ -120,12 +120,27 @@ const ProductForm: React.FC = () => {
                 <TextField label="Остаток" type="number" value={product.stock} onChange={(e) => setProduct({ ...product, stock: Number(e.target.value) })} required fullWidth />
                 <FormControl fullWidth>
                     <InputLabel>Категория</InputLabel>
-                    <Select value={product.category_id || ""} onChange={(e) => setProduct({ ...product, category_id: e.target.value ? Number(e.target.value) : null })} required>
+                    <Select
+                        value={product.category_id || ""}
+                        onChange={(e) => setProduct({ ...product, category_id: e.target.value ? Number(e.target.value) : null })}
+                        required
+                        MenuProps={{
+                            PaperProps: {
+                                style: {
+                                    maxHeight: 250, // Ограничение высоты списка
+                                    overflow: "auto",
+                                },
+                            },
+                        }}
+                    >
                         {categories.map((category) => (
-                            <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
+                            <MenuItem key={category.id} value={category.id}>
+                                {category.name}
+                            </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
+
                 <FormControlLabel control={<Checkbox checked={product.top_product} onChange={(e) => setProduct({ ...product, top_product: e.target.checked })} />} label="Отобразить как топ-продукт" />
                 <input type="file" onChange={(e) => setFile(e.target.files ? e.target.files[0] : null)} />
                 <Button variant="contained" color="secondary" onClick={handleUpload}>📤 Загрузить изображение в S3</Button>
