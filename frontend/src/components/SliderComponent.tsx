@@ -9,8 +9,6 @@ const slide1 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/slider_1.jpg";
 const slide2 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/20.jpg";
 const slide3 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/sloder_3.jpg";
 
-// Оборачиваем Slider в forwardRef с явной типизацией.
-// Используем ts-ignore для подавления ошибки TS2786.
 const SlickSlider = forwardRef<any, Settings>((props, ref) => {
     // @ts-ignore
     return <Slider ref={ref} {...props} />;
@@ -25,7 +23,7 @@ const SliderComponent: React.FC = () => {
         slidesToScroll: 1,   // Сколько слайдов прокручивать
         autoplay: true,      // Авто-прокрутка
         autoplaySpeed: 7000, // Скорость смены слайдов (мс)
-        arrows: true,        // Стрелки навигации
+        arrows: false,        // Стрелки навигации
     };
 
     return (
