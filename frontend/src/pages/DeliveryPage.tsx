@@ -70,7 +70,7 @@ const DeliveryPage: React.FC = () => {
                         </div>
                     </div>
                     <div className="delivery-shop-photo">
-                        <img src="/shop.jpg"></img>
+                        <img src="https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/photo_2025-02-28_13-50-40.jpg"></img>
                     </div>
                 </section>
             </div>

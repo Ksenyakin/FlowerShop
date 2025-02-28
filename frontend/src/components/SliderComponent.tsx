@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 
 const slide1 = "/slider1.jpg";
-const slide2 = "/slider1.jpg";
+const slide2 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/20.jpg";
 const slide3 = "/slider1.jpg";
 
 // Оборачиваем Slider в forwardRef с явной типизацией.
