@@ -7,7 +7,7 @@
     <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="Изменение админки">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/nginx.conf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/styles/AboutPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/styles/AboutPage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/WelcomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/WelcomePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

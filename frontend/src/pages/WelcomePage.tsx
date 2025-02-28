@@ -25,12 +25,12 @@ const WelcomePage: React.FC = () => {
                 <div className="welcome-page-content-main">
 
                     {[
-                        {name: "Весенние букеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/15.jpg"},
-                        {name: "Букеты на 8 марта", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/16.jpg"},
-                        {name: "Коробки с цветами", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/17.jpg"},
-                        {name: "Свадебные букеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/16.jpg"},
-                        {name: "Композиции из цветов", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/17.jpg"},
-                        {name: "Монобукеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/15.jpg"}
+                        {name: "Весенние букеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/vesennie.jpg"},
+                        {name: "Букеты на 8 марта", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/DALL·E 2025-02-28 22.38.41 - A luxurious bouquet for International Women's Day (March 8) in an elegant style with a refined yet lighter background. The bouquet features delicate p.jpg"},
+                        {name: "Коробки с цветами", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/korobki.jpg"},
+                        {name: "Свадебные букеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/svadebnie.jpg"},
+                        {name: "Композиции из цветов", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/kompozocii.jpg"},
+                        {name: "Монобукеты", img: "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/mono.jpg"}
                     ].map((category, index) => (
                         <div className="category-card" key={index}>
                             <img src={category.img} alt={category.name} className="category-image"/>
