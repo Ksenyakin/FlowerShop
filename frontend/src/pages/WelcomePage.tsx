@@ -57,7 +57,7 @@ const WelcomePage: React.FC = () => {
                 {/* Индивидуальный букет */}
                 <div className="welcome-page-individual">
                     <div className="welcome-page-individual-photo">
-                        <img src="https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/19.jpg" alt="Индивидуальный букет"/>
+                        <img src="https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/vibor.jpg" alt="Индивидуальный букет"/>
                     </div>
                     <div className="welcome-page-individual-text">
                         <h2>Вы листаете каталог и не находите «тот самый букет»?</h2>
@@ -74,7 +74,7 @@ const WelcomePage: React.FC = () => {
                         <FeedbackForm />
                     </div>
                     <div className="welcome-page-corp-photo">
-                        <img src="https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/18.jpg" alt="Корпоративные букеты"/>
+                        <img src="https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/rabota.jpg" alt="Корпоративные букеты"/>
                     </div>
                 </div>
 
