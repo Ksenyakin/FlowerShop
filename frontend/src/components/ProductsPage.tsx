@@ -5,6 +5,7 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import Header from "./Header";
 import Footer from "./Footer";
+import { FormControl, InputLabel, MenuItem, Select, Button } from "@mui/material";
 
 interface Product {
     id: number;
@@ -20,18 +21,21 @@ interface Product {
     occasion: string;
 }
 
+interface Category {
+    id: number;
+    name: string;
+}
+
 const ProductsPage: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
+    const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     // Фильтры
     const [priceRange, setPriceRange] = useState<[number, number]>([0, 20000]);
-    const [selectedColor, setSelectedColor] = useState<string | null>(null);
-    const [selectedBouquetType, setSelectedBouquetType] = useState<string | null>(null);
-    const [selectedRecipient, setSelectedRecipient] = useState<string | null>(null);
-    const [selectedOccasion, setSelectedOccasion] = useState<string | null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
     // Загрузка данных
     useEffect(() => {
@@ -51,46 +55,69 @@ const ProductsPage: React.FC = () => {
                 setLoading(false);
             }
         };
+
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch("/api/categories");
+                if (!response.ok) {
+                    throw new Error("Ошибка загрузки категорий");
+                }
+                const data = await response.json();
+                setCategories(data);
+            } catch (error) {
+                console.error("Ошибка загрузки категорий:", error);
+            }
+        };
+
         fetchProducts();
+        fetchCategories();
     }, []);
 
     // Фильтрация товаров
     useEffect(() => {
         const filtered = products.filter((product) => {
             return (
-                product.stock > 0 && // только товары с остатком больше нуля
+                product.stock > 0 &&
                 product.price >= priceRange[0] &&
                 product.price <= priceRange[1] &&
-                (selectedColor ? product.color === selectedColor : true) &&
-                (selectedBouquetType ? product.bouquet_type === selectedBouquetType : true) &&
-                (selectedRecipient ? product.recipient === selectedRecipient : true) &&
-                (selectedOccasion ? product.occasion === selectedOccasion : true)
+                (selectedCategory ? product.category_id === selectedCategory : true)
             );
         });
         setFilteredProducts(filtered);
-    }, [priceRange, selectedColor, selectedBouquetType, selectedRecipient, selectedOccasion, products]);
-
+    }, [priceRange, selectedCategory, products]);
 
     const resetFilters = () => {
         setPriceRange([0, 20000]);
-        setSelectedColor(null);
-        setSelectedBouquetType(null);
-        setSelectedRecipient(null);
-        setSelectedOccasion(null);
+        setSelectedCategory(null);
         setFilteredProducts(products);
     };
-
 
     if (loading) return <div className="loading">Загрузка товаров...</div>;
     if (error) return <div className="error">{error}</div>;
 
     return (
         <div className="products-page">
-            <Header/>
+            <Header />
             <div className="catalog-container">
-                {/* Фильтры слева */}
+                {/* Фильтры */}
                 <aside className="filters">
                     <h3>Фильтры</h3>
+
+                    {/* Фильтр по категории */}
+                    <FormControl fullWidth margin="normal">
+                        <InputLabel id="category-label">Категория</InputLabel>
+                        <Select
+                            labelId="category-label"
+                            value={selectedCategory || ""}
+                            onChange={(e) => setSelectedCategory(e.target.value ? Number(e.target.value) : null)}
+                        >
+                            <MenuItem value="">Все</MenuItem>
+                            {categories.map((category) => (
+                                <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
+                            ))}
+                        </Select>
+                    </FormControl>
+
                     {/* Ползунок цены */}
                     <label>Цена:</label>
                     <Slider
@@ -105,42 +132,13 @@ const ProductsPage: React.FC = () => {
                         }}
                     />
                     <p>{priceRange[0]} ₽ - {priceRange[1]} ₽</p>
-                    {/* Фильтр по цвету */}
-                    <label>Цвет:</label>
-                    <select onChange={(e) => setSelectedColor(e.target.value || null)}>
-                        <option value="">Все</option>
-                        <option value="Красный">Красный</option>
-                        <option value="Белый">Белый</option>
-                        <option value="Розовый">Розовый</option>
-                        <option value="Желтый">Желтый</option>
-                    </select>
-                    {/* Фильтр по типу букета */}
-                    <label>Тип букета:</label>
-                    <select onChange={(e) => setSelectedBouquetType(e.target.value || null)}>
-                        <option value="">Все</option>
-                        <option value="Классический">Классический</option>
-                        <option value="Современный">Современный</option>
-                    </select>
-                    {/* Фильтр по получателю */}
-                    <label>Кому:</label>
-                    <select onChange={(e) => setSelectedRecipient(e.target.value || null)}>
-                        <option value="">Все</option>
-                        <option value="Маме">Маме</option>
-                        <option value="Девушке">Девушке</option>
-                        <option value="Коллеге">Коллеге</option>
-                    </select>
-                    {/* Фильтр по поводу */}
-                    <label>Повод:</label>
-                    <select onChange={(e) => setSelectedOccasion(e.target.value || null)}>
-                        <option value="">Все</option>
-                        <option value="День рождения">День рождения</option>
-                        <option value="Годовщина">Годовщина</option>
-                        <option value="Свадьба">Свадьба</option>
-                    </select>
-                    <button className="clear-filters" onClick={resetFilters}>Сбросить фильтры</button>
+
+                    <Button variant="contained" color="primary" fullWidth onClick={resetFilters}>
+                        Сбросить фильтры
+                    </Button>
                 </aside>
 
-                {/* Блок товаров */}
+                {/* Список товаров */}
                 <div className="products-list">
                     {filteredProducts.map((product) => (
                         <div className="products-card" key={product.id}>
@@ -155,7 +153,7 @@ const ProductsPage: React.FC = () => {
                     ))}
                 </div>
             </div>
-            <Footer/>
+            <Footer />
         </div>
     );
 };

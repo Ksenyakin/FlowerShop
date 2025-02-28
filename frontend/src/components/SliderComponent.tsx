@@ -5,9 +5,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 
-const slide1 = "/slider1.jpg";
+const slide1 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/slider_1.jpg";
 const slide2 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/20.jpg";
-const slide3 = "/slider1.jpg";
+const slide3 = "https://s3.timeweb.cloud/84163e07-decor-fleurs-s3/sloder_3.jpg";
 
 // Оборачиваем Slider в forwardRef с явной типизацией.
 // Используем ts-ignore для подавления ошибки TS2786.
