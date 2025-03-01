@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="ALL" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="Изменение админки">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/WelcomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/WelcomePage.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="fc3ec0be-cb3b-49e6-bbfa-99b81aa585b4" name="Changes" comment="Изменение админки" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,9 +78,9 @@
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\public" />
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\src\pages" />
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\src\components\styles" />
-      <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\public" />
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend\frontend\public\icons" />
       <recent name="C:\Users\DanKs\GolandProjects\flower-shop-backend" />
     </key>
