@@ -1,52 +1,61 @@
-# Getting Started with Create React App
+# Создание интерактивного веб-интерфейса для цветочного магазина с использованием современных технологий
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Интернет-магазин цветов для частных и корпоративных клиентов Краснодара и пригорода. Проект построен на headless-архитектуре Go + React + PostgreSQL, поддерживает PWA-режим, мгновенную оплату через Ю-Кассу и blue/green-деплой с помощью Docker и GitHub Actions.
 
-## Available Scripts
+## Технологии
 
-In the project directory, you can run:
+**Backend:** Go 1.22, Gin, pgx, JWT-авторизация
+**Frontend:** React 18, React Router, React-Query, Zustand, Tailwind CSS, Workbox (PWA)
+**База данных:** PostgreSQL 16 (JSONB, pgvector)
+**Хранилище статики:** S3-совместимое (MinIO/AWS S3)
+**Контейнеризация:** Docker, Docker Compose
+**CI/CD:** GitHub Actions, blue/green-деплой
+**Мониторинг:** Prometheus, Grafana
 
-### `npm start`
+## Быстрый старт (Docker)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. `git clone https://github.com/Ksenyakin/FlowerShop.git && cd FlowerShop`
+2. `cp .env.example .env` и заполните:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+   * POSTGRES\_USER, POSTGRES\_PASSWORD, POSTGRES\_DB
+   * JWT\_SECRET
+   * YOOKASSA\_SHOP\_ID, YOOKASSA\_SECRET\_KEY
+   * S3\_ENDPOINT, S3\_BUCKET, S3\_ACCESS\_KEY, S3\_SECRET\_KEY
+3. `docker-compose up -d --build`
+4. Откройте в браузере [http://localhost:3000](http://localhost:3000) (фронтенд) и [http://localhost:8080/api](http://localhost:8080/api) (API)
 
-### `npm test`
+## Локальная разработка без Docker
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Backend
 
-### `npm run build`
+1. Установите Go 1.22.
+2. В директории `backend` выполните `go mod download`.
+3. Запустите PostgreSQL и укажите в `.env` те же переменные.
+4. Примените миграции:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```
+   go run github.com/golang-migrate/migrate/v4/cmd/migrate \
+     -path ./migrations -database "$DATABASE_URL" up
+   ```
+5. `go run cmd/api/main.go`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Frontend
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Установите Node.js 18+ и pnpm.
+2. В директории `frontend` выполните `pnpm install`.
+3. Скопируйте `.env.example` в `.env` и укажите `REACT_APP_API_URL=http://localhost:8080/api`.
+4. `pnpm start`
 
-### `npm run eject`
+## Тестирование
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+* **Go unit:** `cd backend && go test ./... -race`
+* **React unit (Vitest):** `cd frontend && pnpm test`
+* **Lint:** `cd backend && golangci-lint run`; `cd frontend && pnpm lint`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## CI/CD
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Каждый push в `main` запускает GitHub Actions: lint → тесты → сборка Docker-образов → публикация → blue/green-деплой — всё за \~5 минут без простоев.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Полезные ссылки
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-rmdir /s /q node_modules
-del package-lock.json
-npm cache clean --force
-npm install
-npm run build
+* Админ-панель: [http://localhost:3000/admin](http://localhost:3000/admin)

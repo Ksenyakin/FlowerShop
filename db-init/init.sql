@@ -1,19 +1,19 @@
 -- 1. Таблица пользователей (users)
 CREATE TABLE users (
-                       id SERIAL PRIMARY KEY,
-                       email VARCHAR(255) UNIQUE NOT NULL,
-                       password_hash VARCHAR(255) NOT NULL,
-                       role VARCHAR(50) NOT NULL DEFAULT 'user',
-                       name VARCHAR(100),
-                       phone VARCHAR(20),
-                       address VARCHAR(100),
-                       loyalty_level INTEGER NOT NULL DEFAULT 1,
-                       points INTEGER NOT NULL DEFAULT 0,
-                       total_purchases NUMERIC(10,2) NOT NULL DEFAULT 0,
-                       last_purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                       birthday DATE,
-                       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                       updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL DEFAULT 'user',
+    name VARCHAR(100),
+    phone VARCHAR(20),
+    address VARCHAR(100),
+    loyalty_level INTEGER NOT NULL DEFAULT 1,
+    points INTEGER NOT NULL DEFAULT 0,
+    total_purchases NUMERIC(10,2) NOT NULL DEFAULT 0,
+    last_purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    birthday DATE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Триггер для обновления updated_at
