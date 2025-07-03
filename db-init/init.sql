@@ -120,3 +120,41 @@ CREATE TABLE admins (
                         user_id INTEGER NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
                         created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE categories ADD CONSTRAINT unique_category_name UNIQUE (name);
+
+-- Вставим категории, если их ещё нет
+INSERT INTO categories (name, description)
+VALUES 
+  ('Букет', 'Цветочные композиции в виде классического букета'),
+  ('Кашпо', 'Цветы, оформленные в декоративных кашпо'),
+  ('Сумочка', 'Композиции, оформленные в сумочках или коробках')
+ON CONFLICT (name) DO NOTHING;
+
+
+-- Вставляем новые товары
+INSERT INTO products (category_id, name, description, price, stock, color, bouquet_type, recipient, occasion, top_product, image_url)
+    VALUES
+        (2, 'Кашпо с гипсофилой', 'Нежная композиция в кашпо с гипсофилой.', 1890.00, 10, 'Белый', 'Кашпо', 'Для неё', 'Любой повод', TRUE, 'https://s3.twcstorage.ru/84163e07-decor-fleurs-s3/8.jpg'),
+        (1, 'Букет хризантем', 'Пышный букет свежих хризантем.', 1590.00, 12, 'Жёлтый', 'Букет', 'Мама', 'День рождения', FALSE, 'https://s3.twcstorage.ru/84163e07-decor-fleurs-s3/7.jpg'),
+        (1, 'Букет с матиолой', 'Ароматный букет с матиолой.', 1790.00, 8, 'Сиреневый', 'Букет', 'Подруга', 'Поздравление', FALSE, 'https://s3.twcstorage.ru/84163e07-decor-fleurs-s3/photo_2025-02-28_13-50-40.jpg'),
+        (1, 'Букет альстромерий', 'Лёгкий и яркий букет из альстромерий.', 1690.00, 9, 'Разноцветный', 'Букет', 'Сестра', 'Без повода', FALSE, 'https://s3.twcstorage.ru/84163e07-decor-fleurs-s3/1.jpg'),
+        (2, 'Кашпо с тюльпанами и ирисами', 'Весенняя композиция в кашпо с тюльпанами и ирисами.', 1990.00, 6, 'Фиолетовый', 'Кашпо', 'Любимая', '8 марта', TRUE, 'https://s3.twcstorage.ru/84163e07-decor-fleurs-s3/14.jpg'),
+        (3, 'Сумочка с розами', 'Оригинальный букет-аксессуар с розами в сумочке.', 2290.00, 5, 'Красный', 'Сумочка', 'Жена', 'Годовщина', TRUE, 'https://s3.twcstorage.ru/84163e07-decor-fleurs-s3/4.jpg');
+
+INSERT INTO users (id, email, password_hash, role, name, phone, address, loyalty_level, points, total_purchases, last_purchase_date, birthday, created_at, updated_at) 
+VALUES (
+    1,
+    '123-510@mail.ru',
+    '$2a$10$/66YiRcDtw5r.oXpvaoT2urDsWWDSRpVcIlDYIZj/jDns1lxWb3U6',
+    'admin',
+    'Даниил',
+    '89615005678',
+    'Краснодар',
+    1,
+    0,
+    0.00,
+    '2025-07-03 19:17:58.509862',
+    '2003-07-25',
+    '2025-07-03 19:17:58.509862',
+    '2025-07-03 19:18:14.842376'
+);

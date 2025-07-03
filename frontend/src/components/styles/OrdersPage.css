@@ -1,0 +1,109 @@
+/* src/pages/styles/OrdersPage.css */
+
+.orders-page {
+    align-items: stretch;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: center;
+    flex-direction: column;
+}/* Основной контейнер */
+
+
+.orders-main {
+  flex: 1;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.orders-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.orders-status {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+.orders-status_error {
+  color: red;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-card {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 16px;
+}
+
+.order-card__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.order-card__id {
+  font-weight: bold;
+}
+
+.order-card__date {
+  color: #666;
+}
+
+.order-card__body p {
+  margin: 4px 0;
+}
+
+.order-card__actions {
+  margin-top: 12px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-outline {
+  border: 1px solid #007bff;
+  color: #007bff;
+}
+
+.btn-outline:hover {
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.btn-link {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.btn-link:hover {
+  text-decoration: underline;
+}
+
+.orders-back {
+  text-align: center;
+  margin-top: 32px;
+}
+
+/* Адаптив */
+@media (max-width: 600px) {
+  .order-card__header {
+    flex-direction: column;
+    gap: 4px;
+  }
+}

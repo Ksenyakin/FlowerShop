@@ -14,7 +14,7 @@ services:
       - app-network
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
-      interval: 5s
+      interval: 2s
       timeout: 5s
       retries: 5
 

@@ -16,6 +16,10 @@ import CartPage from "./pages/CartPage";
 import AboutPage from "./pages/AboutPage";
 import GuaranteePage from "./pages/GuaranteePage";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
+import PaymentPage from "./pages/PaymentPage";
+import ContactPage from "./pages/ContactPage";
+import OrdersPage from "./pages/OrdersPage";
+
 
 
 
@@ -43,6 +47,9 @@ const App: React.FC = () => {
                     <Route path="/about" element={<AboutPage/>} />
                     <Route path="/warranty" element={<GuaranteePage/>} />
                     <Route path="/privacy" element={<PrivacyPolicyPage/>} />
+                    <Route path="/payment" element={<PaymentPage />} />
+                    <Route path="/contacts" element={<ContactPage />} />
+                    <Route path="/orders" element={<OrdersPage />} />
 
 
 
