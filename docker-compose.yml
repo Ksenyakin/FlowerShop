@@ -14,7 +14,7 @@ services:
       - app-network
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "postgres"]
-      interval: 5s
+      interval: 2s
       timeout: 5s
       retries: 5
 
@@ -24,17 +24,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: 12345678
-      DB_NAME: FlowersShopBD
-      AWS_ACCESS_KEY_ID: YIBDV9U1GSYFR44OU0ME
-      AWS_SECRET_ACCESS_KEY: N0kL1V9urlhk0ZdLRAscaZOAV80iVBk79BLCQ5SL
-      AWS_REGION: ru-1
-      AWS_ENDPOINT: https://s3.timeweb.cloud
-      AWS_BUCKET_NAME: 84163e07-decor-fleurs-s3
+    env_file:
+      - .env
 
     depends_on:
       db:
